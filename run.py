@@ -1,17 +1,10 @@
-from flask import Flask
-import redis
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-# def hello():
-#     try:
-#         r = redis.Redis(host='localhost', port=6379)
-#         return f"Redis says: {r.ping()}"
-#     except redis.ConnectionError:
-#         return "Cannot connect to Redis. Is it running?"
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
