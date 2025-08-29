@@ -1,12 +1,31 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, g
 import requests
 import json
+import sqlite3
+import os
+from datetime import datetime
 
 app = Flask(__name__)
+
+#function to get db
+DATABASE = 'ThotRelay.db'
 
 # Ollama API configuration
 OLLAMA_HOST = "http://localhost:11434"
 AVAILABLE_MODELS = ["gpt-oss:20b", "deepseek-r1:8b", "llama3:8b"]  # Updated model list
+
+#define function
+def get_db():
+    db = getattr(g, '_database',None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE);
+    return db;
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database',None)
+    if db is not None:
+        db.close()
 
 @app.route('/')
 def index():
