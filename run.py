@@ -6,6 +6,9 @@ import os
 from datetime import datetime
 from psycopg2.extras import RealDictCursor
 
+# Import the DeepSeek model
+from app.model.deepseek_utils import deepseek_model
+
 app = Flask(__name__)
 
 # PostgreSQL configuration
@@ -19,7 +22,7 @@ DATABASE_CONFIG = {
 
 # Ollama API configuration
 OLLAMA_HOST = "http://localhost:11434"
-AVAILABLE_MODELS = ["phi3:mini", "llama3:8b-q4", "gemma:2b"]
+AVAILABLE_MODELS = ["phi3:mini", "llama3:8b-q4", "gemma:2b", "deepseek-r1"]
 
 # Database functions
 def get_db():
@@ -81,42 +84,47 @@ def chat():
         model = data.get('model', 'phi3:mini')
         prompt = data.get('prompt', '')
         
-        # Prepare the request to Ollama
-        ollama_request = {
-            "model": model,
-            "prompt": prompt,
-            "stream": False
-        }
-        
-        # Send request to Ollama
-        response = requests.post(
-            f"{OLLAMA_HOST}/api/generate",
-            json=ollama_request,
-            headers={'Content-Type': 'application/json'}
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            ai_response = result.get('response', 'No response generated')
-            
-            # Save to database
-            conn = get_db()
-            cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO conversations (model_used, user_message, ai_response) VALUES (%s, %s, %s)",
-                (model, prompt, ai_response)
-            )
-            conn.commit()
-            
-            return jsonify({
-                "success": True,
-                "response": ai_response
-            })
+        # Check if we're using DeepSeek
+        if model == 'deepseek-r1':
+            # Use the local DeepSeek model
+            ai_response = deepseek_model.generate_response(prompt)
         else:
-            return jsonify({
-                "success": False,
-                "error": f"Ollama API error: {response.status_code}"
-            })
+            # Use Ollama for other models
+            ollama_request = {
+                "model": model,
+                "prompt": prompt,
+                "stream": False
+            }
+            
+            # Send request to Ollama
+            response = requests.post(
+                f"{OLLAMA_HOST}/api/generate",
+                json=ollama_request,
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                ai_response = result.get('response', 'No response generated')
+            else:
+                return jsonify({
+                    "success": False,
+                    "error": f"Ollama API error: {response.status_code}"
+                })
+        
+        # Save to database
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO conversations (model_used, user_message, ai_response) VALUES (%s, %s, %s)",
+            (model, prompt, ai_response)
+        )
+        conn.commit()
+        
+        return jsonify({
+            "success": True,
+            "response": ai_response
+        })
             
     except Exception as e:
         return jsonify({
