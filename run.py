@@ -11,6 +11,16 @@ AVAILABLE_MODELS = ["phi3:mini", "llama3:8b-q4", "gemma:2b", "deepseek-r1"]
 def index():
     return render_template('index.html', models=AVAILABLE_MODELS)
 
+@app.route('/about')
+def about():
+    # List of images for the slideshow
+    slides = [
+        'slide1.jpg',
+        'slide2.jpg',
+        'slide3.jpg'
+    ]
+    return render_template('about.html', slides=slides)
+
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:
@@ -20,8 +30,6 @@ def chat():
 
         # Handle DeepSeek locally (placeholder)
         if model == 'deepseek-r1':
-            # If you had a local deepseek model, call it here.
-            # For now, just return a placeholder response.
             ai_response = f"[DeepSeek simulated response to: {prompt}]"
         else:
             # Use Ollama for other models
