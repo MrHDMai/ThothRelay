@@ -10,35 +10,53 @@
 
     <div class="slideshow-container">
         {% for slide in slides %}
-            <img class="slide" src="{{ url_for('static', filename='images/' + slide) }}">
+            <img class="slide" src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
+            <div class="caption">Caption for Slide {{ loop.index }}</div>
         {% endfor %}
+
         <a class="prev" onclick="plusSlides(-1)">❮</a>
         <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+
+    <div class="dots">
+        {% for slide in slides %}
+            <span class="dot" onclick="currentSlide({{ loop.index0 }})"></span>
+        {% endfor %}
     </div>
 
     <script>
         let slideIndex = 0;
         const slides = document.getElementsByClassName("slide");
+        const dots = document.getElementsByClassName("dot");
 
         function showSlides(n) {
-            if (n >= slides.length) { slideIndex = 0 }
-            if (n < 0) { slideIndex = slides.length - 1 }
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
+
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
+                dots[i].classList.remove("active");
             }
+
             slides[slideIndex].style.display = "block";
+            dots[slideIndex].classList.add("active");
         }
 
         function plusSlides(n) {
             showSlides(slideIndex += n);
         }
 
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
         function autoSlides() {
             slideIndex++;
             showSlides(slideIndex);
-            setTimeout(autoSlides, 3000); // Change every 3 seconds
+            setTimeout(autoSlides, 4000); // 4 seconds per slide
         }
 
+        // Initialize
         showSlides(slideIndex);
         autoSlides();
     </script>
