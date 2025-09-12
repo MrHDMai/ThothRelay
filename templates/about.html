@@ -6,57 +6,70 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>About Us</h1>
-
-    <div class="slideshow-container">
-        {% for slide in slides %}
-            <img class="slide" src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
-            <div class="caption">Caption for Slide {{ loop.index }}</div>
-        {% endfor %}
-
-        <a class="prev" onclick="plusSlides(-1)">❮</a>
-        <a class="next" onclick="plusSlides(1)">❯</a>
+    <!-- Navbar (same as index page) -->
+    <div class="navbar">
+        <div class="logo">My App</div>
+        <div class="nav-buttons">
+            <div onclick="window.location.href='/'">Home</div>
+            <div onclick="window.location.href='/about'">About</div>
+            <div onclick="window.location.href='/contact'">Contact</div>
+        </div>
     </div>
 
-    <div class="dots">
-        {% for slide in slides %}
-            <span class="dot" onclick="currentSlide({{ loop.index0 }})"></span>
-        {% endfor %}
-    </div>
+    <!-- Page content -->
+    <div class="content about-page">
+        <h1 class="header">About Us</h1>
+        <p class="about-text">
+            Welcome to our project! This page introduces our mission and team.<br>
+            Scroll through the slideshow below to learn more.
+        </p>
 
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            {% for slide in slides %}
+            <div class="slide-wrapper">
+                <img class="slide" src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
+                <div class="caption">Caption for Slide {{ loop.index }}</div>
+            </div>
+            {% endfor %}
+
+            <!-- Controls -->
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+
+                <!-- Dots -->
+        <div class="dots">
+        {% for slide in slides %}
+            <span class="dot" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></span>
+        {% endfor %}
+        </div>
+
+    <!-- Slideshow script -->
     <script>
         let slideIndex = 0;
-        const slides = document.getElementsByClassName("slide");
+        const slides = document.getElementsByClassName("slide-wrapper");
         const dots = document.getElementsByClassName("dot");
 
         function showSlides(n) {
-            if (n >= slides.length) { slideIndex = 0; }
-            if (n < 0) { slideIndex = slides.length - 1; }
-
+            slideIndex = (n + slides.length) % slides.length;
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
                 dots[i].classList.remove("active");
             }
-
             slides[slideIndex].style.display = "block";
             dots[slideIndex].classList.add("active");
         }
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
+        function plusSlides(n) { showSlides(slideIndex + n); }
+        function currentSlide(n) { showSlides(n); }
 
         function autoSlides() {
-            slideIndex++;
-            showSlides(slideIndex);
-            setTimeout(autoSlides, 4000); // 4 seconds per slide
+            showSlides(slideIndex + 1);
+            setTimeout(autoSlides, 4000);
         }
 
-        // Initialize
+        // Initialize slideshow
         showSlides(slideIndex);
         autoSlides();
     </script>
