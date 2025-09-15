@@ -2,76 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Us</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- Navbar (same as index page) -->
+    <!-- Navbar -->
     <div class="navbar">
-        <div class="logo">My App</div>
+        <div class="logo">MyApp</div>
         <div class="nav-buttons">
             <div onclick="window.location.href='/'">Home</div>
             <div onclick="window.location.href='/about'">About</div>
-            <div onclick="window.location.href='/contact'">Contact</div>
         </div>
     </div>
 
-    <!-- Page content -->
+    <!-- Content -->
     <div class="content about-page">
-        <h1 class="header">About Us</h1>
+        <h1 class="header">About This Project</h1>
         <p class="about-text">
-            Welcome to our project! This page introduces our mission and team.<br>
-            Scroll through the slideshow below to learn more.
+            This project demonstrates an AI chatbot interface with a clean, modern design
+            and a responsive image slideshow. The goal is to unify functionality and style
+            across all pages.
         </p>
 
         <!-- Slideshow -->
         <div class="slideshow-container">
             {% for slide in slides %}
             <div class="slide-wrapper">
-                <img class="slide" src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
-                <div class="caption">Caption for Slide {{ loop.index }}</div>
+                <img src="{{ slide.image }}" alt="Slide {{ loop.index }}">
+                <div class="caption">{{ slide.caption }}</div>
             </div>
             {% endfor %}
-
-            <!-- Controls -->
-            <a class="prev" onclick="plusSlides(-1)">❮</a>
-            <a class="next" onclick="plusSlides(1)">❯</a>
         </div>
 
-                <!-- Dots -->
+        <!-- Dots -->
         <div class="dots">
-        {% for slide in slides %}
-            <span class="dot" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></span>
-        {% endfor %}
+            {% for slide in slides %}
+            <span class="dot" onclick="scrollToSlide({{ loop.index0 }})"></span>
+            {% endfor %}
         </div>
+    </div>
 
-    <!-- Slideshow script -->
     <script>
-        let slideIndex = 0;
-        const slides = document.getElementsByClassName("slide-wrapper");
-        const dots = document.getElementsByClassName("dot");
+        // Dot navigation for slideshow
+        const dots = document.querySelectorAll(".dot");
+        const slideshow = document.querySelector(".slideshow-container");
 
-        function showSlides(n) {
-            slideIndex = (n + slides.length) % slides.length;
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-                dots[i].classList.remove("active");
-            }
-            slides[slideIndex].style.display = "block";
-            dots[slideIndex].classList.add("active");
+        function scrollToSlide(index) {
+            const slideWidth = slideshow.querySelector(".slide-wrapper").offsetWidth + 16;
+            slideshow.scrollTo({ left: slideWidth * index, behavior: "smooth" });
+            updateDots(index);
         }
 
-        function plusSlides(n) { showSlides(slideIndex + n); }
-        function currentSlide(n) { showSlides(n); }
-
-        function autoSlides() {
-            showSlides(slideIndex + 1);
-            setTimeout(autoSlides, 4000);
+        function updateDots(activeIndex) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === activeIndex);
+            });
         }
 
-        // Initialize slideshow
-        showSlides(slideIndex);
-        autoSlides();
+        // Optional: sync dots with scroll
+        slideshow.addEventListener("scroll", () => {
+            const slideWidth = slideshow.querySelector(".slide-wrapper").offsetWidth + 16;
+            const index = Math.round(slideshow.scrollLeft / slideWidth);
+            updateDots(index);
+        });
+
+        // Init
+        updateDots(0);
     </script>
 </body>
 </html>
