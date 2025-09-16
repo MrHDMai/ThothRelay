@@ -8,44 +8,41 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">Thoth Relay</div>
-        <div>
-            <nav class="navbar">
-                <div class="navbar">
-                    <div>Thoth Relay</div>
-                    <div class="nav-buttons">
-                        <div>Profile</div>
-                        <div>Menu</div>
-                    </div>
-                </div>
-            </nav>
-            <main class="content">
-                <div class="chat-container">
-                    <div class="model-selector">
-                        <label for="model-select">Choose AI Model:</label>
-                        <select id="model-select">
-                            <option value="phi3:mini">Phi-3 Mini (3.8B - Fast)</option>
-                            <option value="llama3:8b-q4">Llama 3 8B Quantized</option>
-                            <option value="gemma:2b">Gemma 2B (Fastest)</option>
-                            <option value="deepseek-r1">DeepSeek R1 1.5B (Local)</option>
-                        </select>
-                    </div>
+        <nav class="navbar">
+            <div class="logo" onclick="window.location.href='/'">Thoth Relay</div>
+            <div class="nav-buttons">
+                <div>Profile</div>
+                <div>Menu</div>
+                <div onclick="window.location.href='/about'">About</div>
+            </div>
+        </nav>
 
-                    <div class="chat-box" id="chat-box">
-                        <div class="message ai-message">
-                            <div class="message-content">
-                                Welcome to Thoth Relay! I'm your AI assistant. How can I help you today?
-                            </div>
+        <main class="content">
+            <div class="chat-container">
+                <div class="model-selector">
+                    <label for="model-select">Choose AI Model:</label>
+                    <select id="model-select">
+                        <option value="phi3:mini">Phi-3 Mini (3.8B - Fast)</option>
+                        <option value="llama3:8b-q4">Llama 3 8B Quantized</option>
+                        <option value="gemma:2b">Gemma 2B (Fastest)</option>
+                        <option value="deepseek-r1">DeepSeek R1 1.5B (Local)</option>
+                    </select>
+                </div>
+
+                <div class="chat-box" id="chat-box">
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            Welcome to Thoth Relay! I'm your AI assistant. How can I help you today?
                         </div>
                     </div>
-
-                    <div class="input-area">
-                        <textarea id="user-input" placeholder="Type your message here..." rows="3"></textarea>
-                        <button id="send-button">Send</button>
-                    </div>
                 </div>
-            </main>
-        </div>
+
+                <div class="input-area">
+                    <textarea id="user-input" placeholder="Type your message here..." rows="3"></textarea>
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -66,39 +63,25 @@
                 messageDiv.appendChild(contentDiv);
                 chatBox.appendChild(messageDiv);
                 
-                // Scroll to bottom
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
             
             function sendMessage() {
                 const message = userInput.value.trim();
                 if (!message) return;
-                
-                // Add user message to chat
                 addMessage(message, true);
                 userInput.value = '';
-                
-                // Get selected model
                 const model = modelSelect.value;
                 
-                // Send to server
                 fetch('/api/chat', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        model: model,
-                        prompt: message
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: model, prompt: message })
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        addMessage(data.response);
-                    } else {
-                        addMessage('Error: ' + data.error);
-                    }
+                    if (data.success) addMessage(data.response);
+                    else addMessage('Error: ' + data.error);
                 })
                 .catch(error => {
                     addMessage('Error: Could not connect to server');
@@ -107,7 +90,6 @@
             }
             
             sendButton.addEventListener('click', sendMessage);
-            
             userInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
