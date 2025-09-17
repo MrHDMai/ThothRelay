@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Thoth Relay{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <nav class="navbar">
+    <div class="logo" onclick="window.location.href='/'">Thoth Relay</div>
+    <div class="nav-buttons">
+      <div>Profile</div>
+      <div>Menu</div>
+      <div onclick="window.location.href='/about'">About</div>
+    </div>
+  </nav>
+
+  <!-- Shared Content Area -->
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Optional scripts -->
+  {% block scripts %}{% endblock %}
+</body>
+</html>
