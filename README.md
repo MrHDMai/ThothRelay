@@ -1,4 +1,6 @@
-Thoth Relay
+<b>Thoth Relay</b>
+
+
 Thoth Relay is a web application that serves as a gateway to various AI-powered tools, insights, and services. It features a user-friendly interface allowing users to interact with multiple AI models through an integrated chat system. The platform also provides information about its mission, services, and user profiles.
 
 Features
