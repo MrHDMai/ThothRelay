@@ -1,124 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <!-- Shared navbar -->
-  <nav class="navbar">
-    <div class="logo" onclick="window.location.href='/'">Thoth Relay</div>
-    <div class="nav-buttons">
-      <div>Profile</div>
-      <div>Menu</div>
-      <div onclick="window.location.href='/about'">About</div>
-    </div>
-  </nav>
+{% extends "base.html" %}
 
-  <div class="content about-page">
+{% block title %}About | Thoth Relay{% endblock %}
+
+{% block content %}
+<div class="about-page">
     <h1 class="header">About This Project</h1>
     <p class="about-text">
-      This project demonstrates an AI chatbot interface with a clean, modern design
-      and a responsive image slideshow. The goal is to unify functionality and style
-      across all pages.
+        Thoth Relay is an AI-driven platform designed to combine chatbot interaction 
+        with a clean and responsive web interface. This page demonstrates an image slideshow 
+        alongside descriptive text, unified with the same style as the chatbot page.
     </p>
 
-    <!-- Flex / scroll slideshow -->
+    <!-- Slideshow -->
     <div class="slideshow-frame" style="position:relative;">
-      <button class="scroll-btn scroll-left" aria-label="Previous slide" onclick="scrollSlides(-1)">❮</button>
+        <button class="scroll-btn scroll-left" aria-label="Previous slide" onclick="scrollSlides(-1)">❮</button>
 
-      <div class="slideshow-container" id="slideshow">
-        {%- for slide in slides %}
-          <div class="slide-wrapper">
-            <!-- If `slides` is a list of filenames use url_for like this:
-                 <img src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
-               If `slides` is a list of dicts containing image/caption:
-                 <img src="{{ url_for('static', filename='images/' ~ slide.image) }}" alt="Slide {{ loop.index }}">
-            -->
-            <img src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
-            <div class="caption">Caption for Slide {{ loop.index }}</div>
-          </div>
-        {%- endfor %}
-      </div>
+        <div class="slideshow-container" id="slideshow">
+            {% for slide in slides %}
+            <div class="slide-wrapper">
+                <img src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
+                <div class="caption">Caption for Slide {{ loop.index }}</div>
+            </div>
+            {% endfor %}
+        </div>
 
-      <button class="scroll-btn scroll-right" aria-label="Next slide" onclick="scrollSlides(1)">❯</button>
+        <button class="scroll-btn scroll-right" aria-label="Next slide" onclick="scrollSlides(1)">❯</button>
     </div>
 
-    <!-- Dots: render index into data-index (NO inline JS expressions) -->
+    <!-- Dots -->
     <div class="dots" id="dots">
-      {% for slide in slides %}
+        {% for slide in slides %}
         <span class="dot" data-index="{{ loop.index0 }}" role="button" aria-label="Go to slide {{ loop.index }}"></span>
-      {% endfor %}
+        {% endfor %}
     </div>
-  </div>
+</div>
+{% endblock %}
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const slideshow = document.getElementById('slideshow');
-      if (!slideshow) return;
-
-      const dots = Array.from(document.querySelectorAll('#dots .dot'));
-      const slideWrappers = Array.from(slideshow.getElementsByClassName('slide-wrapper'));
-
-      // compute slide width + gap (if you use CSS gap, add it here)
-      function slideSize() {
-        const el = slideWrappers[0];
-        if (!el) return 0;
-        const style = getComputedStyle(slideshow);
-        const gap = parseFloat(style.columnGap || style.gap || 16); // fallback gap
-        return Math.round(el.offsetWidth + gap);
-      }
-
-      // scroll to specific slide index
-      function scrollToIndex(index) {
-        const size = slideSize();
-        slideshow.scrollTo({ left: index * size, behavior: 'smooth' });
-        updateDots(index);
-      }
-
-      // update dots active state
-      function updateDots(activeIndex) {
-        dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
-      }
-
-      // attach click handlers to dots using data-index (safe)
-      dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-          const idx = Number(dot.dataset.index);
-          if (!Number.isNaN(idx)) scrollToIndex(idx);
-        });
-      });
-
-      // scroll by direction (±1)
-      window.scrollSlides = function(direction) {
-        const size = slideSize();
-        if (!size) return;
-        const current = Math.round(slideshow.scrollLeft / size);
-        const next = current + direction;
-        const clamped = Math.max(0, Math.min(next, slideWrappers.length - 1));
-        scrollToIndex(clamped);
-      };
-
-      // sync dots while user scrolls
-      let ticking = false;
-      slideshow.addEventListener('scroll', () => {
-        if (ticking) return;
-        window.requestAnimationFrame(() => {
-          const size = slideSize();
-          if (size > 0) {
-            const index = Math.round(slideshow.scrollLeft / size);
-            updateDots(index);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      });
-
-      // initialize
-      updateDots(0);
-    });
-  </script>
-</body>
-</html>
+{% block scripts %}
+<script src="{{ url_for('static', filename='slideshow.js') }}"></script>
+{% endblock %}

@@ -13,13 +13,17 @@ def index():
 
 @app.route('/about')
 def about():
-    # List of images for the slideshow
     slides = [
         'slide1.jpg',
         'slide2.jpg',
         'slide3.jpg'
     ]
     return render_template('about.html', slides=slides)
+
+# ✅ New route for services
+@app.route('/services')
+def services():
+    return render_template('services.html')
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -28,11 +32,9 @@ def chat():
         model = data.get('model', 'phi3:mini')
         prompt = data.get('prompt', '')
 
-        # Handle DeepSeek locally (placeholder)
         if model == 'deepseek-r1':
             ai_response = f"[DeepSeek simulated response to: {prompt}]"
         else:
-            # Use Ollama for other models
             ollama_request = {
                 "model": model,
                 "prompt": prompt,

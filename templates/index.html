@@ -1,102 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thoth Relay - AI Chat</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="logo" onclick="window.location.href='/'">Thoth Relay</div>
-            <div class="nav-buttons">
-                <div>Profile</div>
-                <div>Menu</div>
-                <div onclick="window.location.href='/about'">About</div>
-            </div>
-        </nav>
+{% extends "base.html" %}
 
-        <main class="content">
-            <div class="chat-container">
-                <div class="model-selector">
-                    <label for="model-select">Choose AI Model:</label>
-                    <select id="model-select">
-                        <option value="phi3:mini">Phi-3 Mini (3.8B - Fast)</option>
-                        <option value="llama3:8b-q4">Llama 3 8B Quantized</option>
-                        <option value="gemma:2b">Gemma 2B (Fastest)</option>
-                        <option value="deepseek-r1">DeepSeek R1 1.5B (Local)</option>
-                    </select>
-                </div>
+{% block title %}Thoth Relay - AI Chat{% endblock %}
 
-                <div class="chat-box" id="chat-box">
-                    <div class="message ai-message">
-                        <div class="message-content">
-                            Welcome to Thoth Relay! I'm your AI assistant. How can I help you today?
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-area">
-                    <textarea id="user-input" placeholder="Type your message here..." rows="3"></textarea>
-                    <button id="send-button">Send</button>
-                </div>
-            </div>
-        </main>
+{% block content %}
+<div class="chat-container">
+    <div class="model-selector">
+        <label for="model-select">Choose AI Model:</label>
+        <select id="model-select">
+            <option value="phi3:mini">Phi-3 Mini (3.8B - Fast)</option>
+            <option value="llama3:8b-q4">Llama 3 8B Quantized</option>
+            <option value="gemma:2b">Gemma 2B (Fastest)</option>
+            <option value="deepseek-r1">DeepSeek R1 1.5B (Local)</option>
+        </select>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatBox = document.getElementById('chat-box');
-            const userInput = document.getElementById('user-input');
-            const sendButton = document.getElementById('send-button');
-            const modelSelect = document.getElementById('model-select');
-            
-            function addMessage(content, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = isUser ? 'message user-message' : 'message ai-message';
-                
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'message-content';
-                contentDiv.textContent = content;
-                
-                messageDiv.appendChild(contentDiv);
-                chatBox.appendChild(messageDiv);
-                
-                chatBox.scrollTop = chatBox.scrollHeight;
+    <div class="chat-box" id="chat-box">
+        <div class="message ai-message">
+            <div class="message-content">
+                Welcome to Thoth Relay! I'm your AI assistant. How can I help you today?
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <textarea id="user-input" placeholder="Type your message here..." rows="3"></textarea>
+        <button id="send-button">Send</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const modelSelect = document.getElementById('model-select');
+    
+    function addMessage(content, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'message user-message' : 'message ai-message';
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        contentDiv.textContent = content;
+        
+        messageDiv.appendChild(contentDiv);
+        chatBox.appendChild(messageDiv);
+        
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+    
+    function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message) return;
+        
+        addMessage(message, true);
+        userInput.value = '';
+        
+        const model = modelSelect.value;
+        
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                model: model,
+                prompt: message
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                addMessage(data.response);
+            } else {
+                addMessage('Error: ' + data.error);
             }
-            
-            function sendMessage() {
-                const message = userInput.value.trim();
-                if (!message) return;
-                addMessage(message, true);
-                userInput.value = '';
-                const model = modelSelect.value;
-                
-                fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ model: model, prompt: message })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) addMessage(data.response);
-                    else addMessage('Error: ' + data.error);
-                })
-                .catch(error => {
-                    addMessage('Error: Could not connect to server');
-                    console.error('Error:', error);
-                });
-            }
-            
-            sendButton.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                }
-            });
+        })
+        .catch(error => {
+            addMessage('Error: Could not connect to server');
+            console.error('Error:', error);
         });
-    </script>
-</body>
-</html>
+    }
+    
+    sendButton.addEventListener('click', sendMessage);
+    
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+});
+</script>
+{% endblock %}

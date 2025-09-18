@@ -169,7 +169,7 @@ body {
     color: #6b7280;
 }
 
-//* -------------------
+/* -------------------
    About Page Styling
 ------------------- */
 .about-page {
@@ -261,4 +261,79 @@ body {
 
 .dot.active {
     background-color: #4de1b2; /* teal accent */
+}
+
+/* Flex wrapper for GSAP-friendly layout */
+.page-wrapper {
+    display: flex;
+    flex-direction: column; /* vertical stack: navbar on top, content below */
+    min-height: 100vh;
+}
+
+/* Navbar fixed top */
+.navbar {
+    flex: 0 0 auto;
+}
+
+/* Right-aligned content block */
+.content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end; /* push everything to the right */
+    padding: 2rem;
+}
+
+/* -------------------
+   Services Page Styling
+------------------- */
+.services-page {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.services-intro {
+    font-size: 1.2rem;
+    color: #374151;
+    margin-bottom: 2rem;
+}
+
+/* Flexbox container */
+.services-flex {
+    display: flex;
+    flex-wrap: wrap;          /* allow wrapping on smaller screens */
+    gap: 1.5rem;              /* space between cards */
+    justify-content: center;  /* center cards */
+}
+
+/* Service cards */
+.service-card {
+    flex: 1 1 calc(45% - 1rem); /* responsive 2-column layout */
+    min-width: 250px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #4de1b2; /* theme teal */
+}
+
+.service-card p {
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1.6;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
