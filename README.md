@@ -1,44 +1,50 @@
 
-<b>Thot Relay</b>
+Thoth Relay – AI-Powered Platform
+Thoth Relay is an ongoing web application project designed to serve as a comprehensive gateway to AI tools, services, and interactive experiences. The platform enables users to engage with multiple AI models through an intuitive chat interface while offering a range of AI-driven solutions tailored for modern digital needs.
 
-</b>Multi-Model AI Chat</b>
-Choose from various AI models for dynamic conversations.
+Features
+Multi-Model AI Chat
+Choose from various AI models for dynamic conversations
 
-Real-time interaction with model switching capability.
+Real-time interaction with model switching capability
 
-User-friendly and responsive chat interface.
+User-friendly and responsive chat interface
 
-🔍 Services Overview
+Live Learning Integration: Utilizes Scrapy for real-time web scraping to enhance AI responses with current information
+
+Services Overview
 We are developing a suite of AI-enhanced services including:
 
-AI Chatbots – Custom AI-powered chatbot solutions for websites and applications.
+AI Chatbots – Custom AI-powered chatbot solutions for websites and applications
 
-Data Analytics – Advanced data visualization and insight generation tools.
+Data Analytics – Advanced data visualization and insight generation tools
 
-Cloud Solutions – Scalable cloud infrastructure and deployment services.
+Cloud Solutions – Scalable cloud infrastructure and deployment services
 
-Security Audits – Penetration testing and vulnerability assessment for robust security.
+Security Audits – Penetration testing and vulnerability assessment for robust security
 
-👤 User Profiles
-Personalized user experience with profile customization.
+User Profiles
+Personalized user experience with profile customization
 
-Session management and interaction history (planned).
+Session management and interaction history (planned)
 
-🌐 Clean & Modern UI
-Easy navigation with a structured menu system.
+Clean & Modern UI
+Easy navigation with a structured menu system
 
-Mobile-responsive design (in development).
+Mobile-responsive design (in development)
 
 Project Status
-⚠️ Note: This project is under active development.
+Note: This project is under active development.
 Features and design are subject to change as we continue to build and improve the platform.
 
-🛠️ Tech Stack (Planned / In-Progress)
+Tech Stack (Planned / In-Progress)
 Frontend: HTML, CSS, JavaScript (React planned)
 
 Backend: Flask
 
-AI Integration: Locaclly hosted model obtained from hugging face operating on local GPU designed to be fruther trained 
+AI Integration: Locally hosted model from Hugging Face operating on local GPU with capability for further training
+
+Web Scraping: Scrapy integration for real-time information retrieval
 
 Database: MongoDB or Firebase (to be implemented)
 
