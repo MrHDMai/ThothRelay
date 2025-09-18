@@ -1,52 +1,47 @@
+flowchart TD
+    A["**Thoth Relay – AI-Powered Platform**"] --> B["**Features**"]
+    B --> B1["**Multi-Model AI Chat**"]
+    B1 --> B1a["Choose from various AI models for dynamic conversations"]
+    B1 --> B1b["Real-time interaction with model switching capability"]
+    B1 --> B1c["User-friendly and responsive chat interface"]
 
-Thoth Relay – AI-Powered Platform
-Thoth Relay is an ongoing web application project designed to serve as a comprehensive gateway to AI tools, services, and interactive experiences. The platform enables users to engage with multiple AI models through an intuitive chat interface while offering a range of AI-driven solutions tailored for modern digital needs.
+    B --> B2["**Live Learning Integration**"]
+    B2 --> B2a["Utilizes Scrapy for real-time web scraping"]
+    B2a --> B2b["Enhances AI responses with current information"]
 
-Features
-Multi-Model AI Chat
-Choose from various AI models for dynamic conversations
+    A --> C["**Services Overview**"]
+    C --> C1["**AI Chatbots** – Custom AI-powered chatbot solutions"]
+    C --> C2["**Data Analytics** – Advanced data visualization & insights"]
+    C --> C3["**Cloud Solutions** – Scalable cloud infrastructure & deployment"]
+    C --> C4["**Security Audits** – Penetration testing & vulnerability assessment"]
 
-Real-time interaction with model switching capability
+    A --> D["**User Profiles**"]
+    D --> D1["Personalized user experience with profile customization"]
+    D --> D2["Session management & interaction history (planned)"]
 
-User-friendly and responsive chat interface
+    A --> E["**Clean & Modern UI**"]
+    E --> E1["Easy navigation with structured menu system"]
+    E --> E2["Mobile-responsive design (in development)"]
 
-Live Learning Integration: Utilizes Scrapy for real-time web scraping to enhance AI responses with current information
+    A --> F["**Project Status**"]
+    F --> F1["Active development – Features & design may change"]
 
-Services Overview
-We are developing a suite of AI-enhanced services including:
+    A --> G["**Tech Stack (Planned / In-Progress)**"]
+    G --> G1["**Frontend:** HTML, CSS, JavaScript (React planned)"]
+    G --> G2["**Backend:** Flask"]
+    G --> G3["**AI Integration:** Locally hosted Hugging Face model with GPU support"]
+    G --> G4["**Web Scraping:** Scrapy for real-time info retrieval"]
+    G --> G5["**Database:** MongoDB or Firebase (to be implemented)"]
 
-AI Chatbots – Custom AI-powered chatbot solutions for websites and applications
+    %% Optional styles
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333,stroke-width:1px
+    style C fill:#bbf,stroke:#333,stroke-width:1px
+    style D fill:#bbf,stroke:#333,stroke-width:1px
+    style E fill:#bbf,stroke:#333,stroke-width:1px
+    style F fill:#bbf,stroke:#333,stroke-width:1px
+    style G fill:#bbf,stroke:#333,stroke-width:1px
 
-Data Analytics – Advanced data visualization and insight generation tools
-
-Cloud Solutions – Scalable cloud infrastructure and deployment services
-
-Security Audits – Penetration testing and vulnerability assessment for robust security
-
-User Profiles
-Personalized user experience with profile customization
-
-Session management and interaction history (planned)
-
-Clean & Modern UI
-Easy navigation with a structured menu system
-
-Mobile-responsive design (in development)
-
-Project Status
-Note: This project is under active development.
-Features and design are subject to change as we continue to build and improve the platform.
-
-Tech Stack (Planned / In-Progress)
-Frontend: HTML, CSS, JavaScript (React planned)
-
-Backend: Flask
-
-AI Integration: Locally hosted model from Hugging Face operating on local GPU with capability for further training
-
-Web Scraping: Scrapy integration for real-time information retrieval
-
-Database: MongoDB or Firebase (to be implemented)
 
 
 
