@@ -1,18 +1,48 @@
-<b>Thoth Relay</b>
+
+<b>Thot Relay</b>
+
+</b>Multi-Model AI Chat</b>
+Choose from various AI models for dynamic conversations.
+
+Real-time interaction with model switching capability.
+
+User-friendly and responsive chat interface.
+
+🔍 Services Overview
+We are developing a suite of AI-enhanced services including:
+
+AI Chatbots – Custom AI-powered chatbot solutions for websites and applications.
+
+Data Analytics – Advanced data visualization and insight generation tools.
+
+Cloud Solutions – Scalable cloud infrastructure and deployment services.
+
+Security Audits – Penetration testing and vulnerability assessment for robust security.
+
+👤 User Profiles
+Personalized user experience with profile customization.
+
+Session management and interaction history (planned).
+
+🌐 Clean & Modern UI
+Easy navigation with a structured menu system.
+
+Mobile-responsive design (in development).
+
+Project Status
+⚠️ Note: This project is under active development.
+Features and design are subject to change as we continue to build and improve the platform.
+
+🛠️ Tech Stack (Planned / In-Progress)
+Frontend: HTML, CSS, JavaScript (React planned)
+
+Backend: Flask
+
+AI Integration: Locaclly hosted model obtained from hugging face operating on local GPU designed to be fruther trained 
+
+Database: MongoDB or Firebase (to be implemented)
 
 
-Thoth Relay is a web application that serves as a gateway to various AI-powered tools, insights, and services. It features a user-friendly interface allowing users to interact with multiple AI models through an integrated chat system. The platform also provides information about its mission, services, and user profiles.
-
-Features
-Multi-model AI chat interface
-
-User profile management
-
-Service overview and exploration
-
-Responsive and intuitive navigation
-
-Ideal for developers, researchers, and AI enthusiasts looking to leverage different AI capabilities in one seamless environment.
 
 <img width="1242" height="652" alt="image" src="https://github.com/user-attachments/assets/97379e58-4d94-407e-9c88-2bd0a2dfae8f" />
 
