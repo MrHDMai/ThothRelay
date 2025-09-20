@@ -1,32 +1,50 @@
 {% extends "base.html" %}
 
-{% block title %}Our Services{% endblock %}
+{% block title %}Services - Thoth Relay{% endblock %}
 
 {% block content %}
-<div class="content services-page">
-    <h1 class="header">Our Services</h1>
-    <p class="services-intro">
-        We provide a range of innovative solutions to help you grow.  
-        Explore some of our key services below.
-    </p>
+<div class="services-container">
+    <h1 class="services-title">Our Services</h1>
 
-    <!-- Flexbox container -->
-    <div class="services-flex">
+    <div class="services-grid">
+        <!-- Service Card 1 -->
         <div class="service-card">
-            <h2>AI Chatbots</h2>
-            <p>Custom AI-powered chatbot solutions for websites and apps.</p>
+            <div class="icon">🤖</div>
+            <h2>AI Chatbot</h2>
+            <p>
+                Engage with state-of-the-art AI chat models seamlessly integrated 
+                into your workflow.
+            </p>
         </div>
+
+        <!-- Service Card 2 -->
         <div class="service-card">
-            <h2>Data Analytics</h2>
-            <p>Unlock insights with advanced data visualization and analysis.</p>
+            <div class="icon">⚡</div>
+            <h2>Automation</h2>
+            <p>
+                Automate repetitive tasks with intelligent orchestration tools 
+                designed for efficiency.
+            </p>
         </div>
+
+        <!-- Service Card 3 -->
         <div class="service-card">
-            <h2>Cloud Solutions</h2>
-            <p>Scalable cloud-based infrastructure and deployments.</p>
+            <div class="icon">🌐</div>
+            <h2>API Integration</h2>
+            <p>
+                Connect multiple AI and cloud services effortlessly with 
+                reliable integrations.
+            </p>
         </div>
+
+        <!-- Service Card 4 -->
         <div class="service-card">
-            <h2>Security Audits</h2>
-            <p>Comprehensive penetration testing and vulnerability assessments.</p>
+            <div class="icon">📊</div>
+            <h2>Analytics</h2>
+            <p>
+                Gain insights with powerful real-time analytics dashboards 
+                driven by AI.
+            </p>
         </div>
     </div>
 </div>
