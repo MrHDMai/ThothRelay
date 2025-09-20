@@ -3,11 +3,15 @@ import requests
 
 app = Flask(__name__)
 
-# Ollama API configuration
+# Ollama API config
 OLLAMA_HOST = "http://localhost:11434"
 AVAILABLE_MODELS = ["phi3:mini", "llama3:8b-q4", "gemma:2b", "deepseek-r1"]
 
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/chat')
 def index():
     return render_template('index.html', models=AVAILABLE_MODELS)
 
@@ -20,7 +24,7 @@ def about():
     ]
     return render_template('about.html', slides=slides)
 
-# ✅ New route for services
+
 @app.route('/services')
 def services():
     return render_template('services.html')
