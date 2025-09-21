@@ -1,41 +1,54 @@
 {% extends "base.html" %}
 
-{% block title %}About | Thoth Relay{% endblock %}
+{% block title %}About - Thoth Relay{% endblock %}
 
 {% block content %}
-<div class="about-page">
-    <h1 class="header">About This Project</h1>
-    <p class="about-text">
-        Thoth Relay is an AI-driven platform designed to combine chatbot interaction 
-        with a clean and responsive web interface. This page demonstrates an image slideshow 
-        alongside descriptive text, unified with the same style as the chatbot page.
+<section class="about-page">
+  <div class="about-text">
+    <h2>About Us</h2>
+    <p>
+      Thoth Relay is an AI-powered platform designed to bring together multiple 
+      AI services in one seamless experience. Our mission is to empower users 
+      with accessible tools that inspire creativity and productivity.
     </p>
+  </div>
 
-    <!-- Slideshow -->
-    <div class="slideshow-frame" style="position:relative;">
-        <button class="scroll-btn scroll-left" aria-label="Previous slide" onclick="scrollSlides(-1)">❮</button>
+  <!-- Flexbox slideshow -->
+  <div class="slideshow-flex">
+    <button class="scroll-btn prev">&#10094;</button>
 
-        <div class="slideshow-container" id="slideshow">
-            {% for slide in slides %}
-            <div class="slide-wrapper">
-                <img src="{{ url_for('static', filename='images/' + slide) }}" alt="Slide {{ loop.index }}">
-                <div class="caption">Caption for Slide {{ loop.index }}</div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <button class="scroll-btn scroll-right" aria-label="Next slide" onclick="scrollSlides(1)">❯</button>
+    <div class="slides-wrapper">
+      <div class="slide-card">
+        <img src="{{ url_for('static', filename='slide1.jpg') }}" alt="AI Collaboration">
+        <div class="caption">Seamless AI Collaboration</div>
+      </div>
+      <div class="slide-card">
+        <img src="{{ url_for('static', filename='slide2.jpg') }}" alt="Data Security">
+        <div class="caption">Built with Data Security in Mind</div>
+      </div>
+      <div class="slide-card">
+        <img src="{{ url_for('static', filename='slide3.jpg') }}" alt="Interactive Tools">
+        <div class="caption">Interactive Tools for Everyone</div>
+      </div>
     </div>
 
-    <!-- Dots -->
-    <div class="dots" id="dots">
-        {% for slide in slides %}
-        <span class="dot" data-index="{{ loop.index0 }}" role="button" aria-label="Go to slide {{ loop.index }}"></span>
-        {% endfor %}
-    </div>
-</div>
+    <button class="scroll-btn next">&#10095;</button>
+  </div>
+</section>
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='slideshow.js') }}"></script>
+<script>
+const prevBtn = document.querySelector(".scroll-btn.prev");
+const nextBtn = document.querySelector(".scroll-btn.next");
+const slidesWrapper = document.querySelector(".slides-wrapper");
+
+prevBtn.addEventListener("click", () => {
+  slidesWrapper.scrollBy({ left: -320, behavior: "smooth" });
+});
+
+nextBtn.addEventListener("click", () => {
+  slidesWrapper.scrollBy({ left: 320, behavior: "smooth" });
+});
+</script>
 {% endblock %}
