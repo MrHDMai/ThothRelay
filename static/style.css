@@ -169,71 +169,170 @@ body {
 /* ===================
    ABOUT
 =================== */
+/* Global (applies to all pages through base.html) */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f9fafb;
+    color: #111827;
+}
+
+/* Navbar (from base.html) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1f2937; /* dark gray */
+    color: #ffffff;
+    padding: 1rem 2rem;
+}
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4DE1B2; /* teal */
+}
+.nav-buttons div {
+    display: inline-block;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.nav-buttons div:hover {
+    color: #4DE1B2; /* teal hover */
+}
+
+/* About Page */
 .about-page {
     text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 1100px;
+    margin: 2rem auto;
     padding: 2rem;
 }
+
 .about-text {
     font-size: 1.2rem;
+    line-height: 1.8;
     color: #374151;
     margin-bottom: 2rem;
 }
 
-/* Slideshow */
-.slideshow-container {
+//* Flexbox Slideshow */
+.slideshow-flex {
     position: relative;
-    max-width: 900px;
-    margin: 40px auto;
-    border-radius: 12px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
-.slide {
+
+.slides-wrapper {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+}
+.slides-wrapper::-webkit-scrollbar {
     display: none;
-    width: 100%; height: 500px;
-    object-fit: cover;
-    transition: opacity 1s ease-in-out;
 }
-.prev, .next {
-    cursor: pointer;
+
+.slide-card {
+    flex: 0 0 400px;   /* was 300px → now wider */
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+.slide-card:hover {
+    transform: translateY(-8px);
+}
+.slide-card img {
+    width: 100%;
+    height: 260px;   /* was 200px → now taller */
+    object-fit: cover;
+}
+
+/* Interactive caption */
+.caption {
+    position: absolute;
+    bottom: -70%;                /* start mostly hidden */
+    left: 0; 
+    right: 0;
+    background: rgba(0, 128, 128, 0.95); /* teal theme */
+    color: #fff;
+    padding: 20px;               /* generous padding */
+    font-size: 1.4rem;           /* bigger text */
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.5;            /* better readability */
+    letter-spacing: 0.5px;
+    transition: bottom 0.4s ease;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    min-height: 40%;             /* give it room for text */
+    display: flex;               /* flexbox for centering */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* reveal more space on hover */
+.slide-card:hover .caption {
+    bottom: 0;
+    min-height: 60%;             /* expands when revealed */
+}
+
+
+/* Scroll buttons */
+.scroll-btn {
     position: absolute;
     top: 50%;
-    padding: 12px;
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 50%;
-    background-color: rgba(77, 225, 178, 0.7);
     transform: translateY(-50%);
-    transition: background-color 0.3s ease;
-}
-.prev:hover, .next:hover { background-color: rgba(59, 203, 165, 0.9); }
-.prev { left: 15px; } .next { right: 15px; }
-
-.caption {
-    position: absolute; bottom: 20px; left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(77,225,178,0.85);
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.dots { text-align: center; margin-top: 15px; }
-.dot {
-    cursor: pointer;
-    height: 12px; width: 12px;
-    margin: 0 6px;
-    background-color: #bbb;
+    background: rgba(77, 225, 178, 0.85);
+    border: none;
+    padding: 14px;
     border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.3s;
+    cursor: pointer;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+    z-index: 10;
 }
-.dot.active { background-color: #4de1b2; }
+.scroll-btn:hover {
+    background: rgba(59, 203, 165, 0.95);
+}
+.scroll-btn.prev { left: 15px; }
+.scroll-btn.next { right: 15px; }
+
+
+/* ===================
+   HOME
+=================== */
+.home-page {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.home-intro {
+    font-size: 1.2rem;
+    color: #374151;
+    margin-bottom: 2rem;
+}
+.home-flex {
+    display: flex; justify-content: space-around; gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.home-card {
+    flex: 1 1 250px;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+.home-card:hover { transform: translateY(-5px); }
 
 /* ===================
    SERVICES
@@ -281,31 +380,3 @@ body {
     font-size: 0.95rem;
     color: #4b5563;
 }
-
-/* ===================
-   HOME
-=================== */
-.home-page {
-    text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-.home-intro {
-    font-size: 1.2rem;
-    color: #374151;
-    margin-bottom: 2rem;
-}
-.home-flex {
-    display: flex; justify-content: space-around; gap: 1.5rem;
-    flex-wrap: wrap;
-}
-.home-card {
-    flex: 1 1 250px;
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
-}
-.home-card:hover { transform: translateY(-5px); }
