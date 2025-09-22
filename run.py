@@ -29,6 +29,10 @@ def about():
 def services():
     return render_template('services.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:

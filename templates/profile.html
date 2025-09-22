@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Thoth Relay{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+        <img src="{{ url_for('static', filename='default-avatar.png') }}" alt="Profile Picture" class="profile-avatar">
+        <h2>John Doe</h2>
+        <p>Email: john.doe@example.com</p>
+        <p>Member since: September 2025</p>
+        <button class="edit-btn">Edit Profile</button>
+    </div>
+</div>
+{% endblock %}
