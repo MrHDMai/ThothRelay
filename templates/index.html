@@ -4,26 +4,29 @@
 
 {% block content %}
 <div class="chat-container">
+    <!-- Model Selector -->
     <div class="model-selector">
         <label for="model-select">Choose AI Model:</label>
         <select id="model-select">
-            <option value="phi3:mini">Phi-3 Mini (3.8B - Fast)</option>
-            <option value="llama3:8b-q4">Llama 3 8B Quantized</option>
-            <option value="gemma:2b">Gemma 2B (Fastest)</option>
-            <option value="deepseek-r1">DeepSeek R1 1.5B (Local)</option>
+            {% for key, name in models.items() %}
+                <option value="{{ key }}">{{ name }}</option>
+            {% endfor %}
         </select>
     </div>
 
+    <!-- Chat Box -->
     <div class="chat-box" id="chat-box">
         <div class="message ai-message">
             <div class="message-content">
-                Welcome to Thoth Relay! I'm your AI assistant. How can I help you today?
+                Welcome to <strong>Thoth Relay</strong> — your AI assistant is ready. ✨  
+                How can I help you today?
             </div>
         </div>
     </div>
 
+    <!-- Input Area -->
     <div class="input-area">
-        <textarea id="user-input" placeholder="Type your message here..." rows="3"></textarea>
+        <textarea id="user-input" placeholder="Type your message here..." rows="2"></textarea>
         <button id="send-button">Send</button>
     </div>
 </div>
@@ -36,56 +39,78 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
     const modelSelect = document.getElementById('model-select');
-    
+
+    // Restore chat from localStorage if exists
+    const savedChat = localStorage.getItem('chatHistory');
+    if (savedChat) chatBox.innerHTML = savedChat;
+
+    // --- Utility functions ---
     function addMessage(content, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = isUser ? 'message user-message' : 'message ai-message';
-        
+
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
         contentDiv.textContent = content;
-        
+
         messageDiv.appendChild(contentDiv);
         chatBox.appendChild(messageDiv);
-        
-        chatBox.scrollTop = chatBox.scrollHeight;
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+        localStorage.setItem('chatHistory', chatBox.innerHTML);
     }
-    
+
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message ai-message typing';
+        typingDiv.innerHTML = '<div class="message-content">...</div>';
+        chatBox.appendChild(typingDiv);
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+        return typingDiv;
+    }
+
+    // --- Message sending logic ---
     function sendMessage() {
         const message = userInput.value.trim();
         if (!message) return;
-        
+
         addMessage(message, true);
         userInput.value = '';
-        
+        userInput.disabled = true;
+        sendButton.disabled = true;
+        sendButton.textContent = "Sending...";
+
         const model = modelSelect.value;
-        
+        const typingIndicator = showTypingIndicator();
+
         fetch('/api/chat', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                model: model,
-                prompt: message
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ model: model, prompt: message })
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
+            typingIndicator.remove();
             if (data.success) {
                 addMessage(data.response);
             } else {
-                addMessage('Error: ' + data.error);
+                addMessage('⚠️ ' + data.error);
             }
         })
-        .catch(error => {
-            addMessage('Error: Could not connect to server');
-            console.error('Error:', error);
+        .catch(err => {
+            typingIndicator.remove();
+            console.error('Error:', err);
+            addMessage('❌ Could not connect to server.');
+        })
+        .finally(() => {
+            userInput.disabled = false;
+            sendButton.disabled = false;
+            sendButton.textContent = "Send";
+            userInput.focus();
         });
     }
-    
+
+    // --- Event listeners ---
     sendButton.addEventListener('click', sendMessage);
-    
     userInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
