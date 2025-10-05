@@ -1,73 +1,50 @@
-{% extends "base.html" %}
-
-{% block title %}About - Thoth Relay{% endblock %}
-
-{% block content %}
-<section class="about-page">
-  <div class="about-container">
-    <div class="about-text">
-      <h2>About Us</h2>
-      <p>
-        <strong>Thoth Relay</strong> is an AI-powered platform that unifies
-        multiple intelligent systems into one seamless experience. Our mission
-        is to empower users with creative, efficient, and secure AI tools that
-        drive innovation and productivity.
-      </p>
-      <p>
-        Whether you're an engineer, designer, or dreamer, Thoth Relay helps you
-        connect with the power of AI — effortlessly.
-      </p>
-    </div>
-
-    <!-- Image Slideshow -->
-    <div class="slideshow-container">
-      <button class="scroll-btn prev" aria-label="Previous slide">&#10094;</button>
-
-      <div class="slides-wrapper" tabindex="0">
-        {% for slide, caption in [
-          ('slide1.jpg', 'Seamless AI Collaboration'),
-          ('slide2.jpg', 'Built with Data Security in Mind'),
-          ('slide3.jpg', 'Interactive Tools for Everyone')
-        ] %}
-        <div class="slide-card">
-          <img
-            src="{{ url_for('static', filename=slide) }}"
-            alt="{{ caption }}"
-            loading="lazy"
-          >
-          <div class="caption">{{ caption }}</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | ThothRelay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+    <section class="about-hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>About ThothRelay</h1>
+            <p>Seamless AI collaboration built with data security in mind.</p>
         </div>
-        {% endfor %}
-      </div>
+    </section>
 
-      <button class="scroll-btn next" aria-label="Next slide">&#10095;</button>
-    </div>
-  </div>
-</section>
-{% endblock %}
+    <section class="about-container">
+        <div class="about-card">
+            <h2>Our Vision</h2>
+            <p>
+                At ThothRelay, we believe in bridging the gap between human creativity and artificial intelligence. 
+                Our platform empowers users to collaborate with AI tools securely, efficiently, and intuitively — 
+                bringing innovation and privacy together.
+            </p>
+        </div>
 
-{% block scripts %}
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const prevBtn = document.querySelector(".scroll-btn.prev");
-  const nextBtn = document.querySelector(".scroll-btn.next");
-  const slidesWrapper = document.querySelector(".slides-wrapper");
+        <div class="about-card">
+            <h2>Data Security</h2>
+            <p>
+                Security is not an afterthought — it’s the foundation. 
+                Every interaction is handled with encryption and best practices to ensure your work, ideas, and data stay protected. 
+                Your trust drives our mission to keep innovation safe.
+            </p>
+        </div>
 
-  const scrollAmount = 340; // Adjust per card width + margin
+        <div class="about-card">
+            <h2>Why ThothRelay?</h2>
+            <p>
+                Built for developers, researchers, and creators, ThothRelay transforms AI-assisted workflows into a seamless experience. 
+                With smart integrations and user-friendly interfaces, we aim to make AI collaboration accessible, reliable, and empowering.
+            </p>
+        </div>
+    </section>
 
-  prevBtn.addEventListener("click", () => {
-    slidesWrapper.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-  });
-
-  nextBtn.addEventListener("click", () => {
-    slidesWrapper.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  });
-
-  // Keyboard navigation (for accessibility)
-  slidesWrapper.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") slidesWrapper.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    if (e.key === "ArrowRight") slidesWrapper.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  });
-});
-</script>
-{% endblock %}
+    <footer class="about-footer">
+        <p>© 2025 ThothRelay. All rights reserved.</p>
+    </footer>
+</body>
+</html>
