@@ -4,51 +4,70 @@
 
 {% block content %}
 <section class="about-page">
-  <div class="about-text">
-    <h2>About Us</h2>
-    <p>
-      Thoth Relay is an AI-powered platform designed to bring together multiple 
-      AI services in one seamless experience. Our mission is to empower users 
-      with accessible tools that inspire creativity and productivity.
-    </p>
-  </div>
-
-  <!-- Flexbox slideshow -->
-  <div class="slideshow-flex">
-    <button class="scroll-btn prev">&#10094;</button>
-
-    <div class="slides-wrapper">
-      <div class="slide-card">
-        <img src="{{ url_for('static', filename='slide1.jpg') }}" alt="AI Collaboration">
-        <div class="caption">Seamless AI Collaboration</div>
-      </div>
-      <div class="slide-card">
-        <img src="{{ url_for('static', filename='slide2.jpg') }}" alt="Data Security">
-        <div class="caption">Built with Data Security in Mind</div>
-      </div>
-      <div class="slide-card">
-        <img src="{{ url_for('static', filename='slide3.jpg') }}" alt="Interactive Tools">
-        <div class="caption">Interactive Tools for Everyone</div>
-      </div>
+  <div class="about-container">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>
+        <strong>Thoth Relay</strong> is an AI-powered platform that unifies
+        multiple intelligent systems into one seamless experience. Our mission
+        is to empower users with creative, efficient, and secure AI tools that
+        drive innovation and productivity.
+      </p>
+      <p>
+        Whether you're an engineer, designer, or dreamer, Thoth Relay helps you
+        connect with the power of AI — effortlessly.
+      </p>
     </div>
 
-    <button class="scroll-btn next">&#10095;</button>
+    <!-- Image Slideshow -->
+    <div class="slideshow-container">
+      <button class="scroll-btn prev" aria-label="Previous slide">&#10094;</button>
+
+      <div class="slides-wrapper" tabindex="0">
+        {% for slide, caption in [
+          ('slide1.jpg', 'Seamless AI Collaboration'),
+          ('slide2.jpg', 'Built with Data Security in Mind'),
+          ('slide3.jpg', 'Interactive Tools for Everyone')
+        ] %}
+        <div class="slide-card">
+          <img
+            src="{{ url_for('static', filename=slide) }}"
+            alt="{{ caption }}"
+            loading="lazy"
+          >
+          <div class="caption">{{ caption }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <button class="scroll-btn next" aria-label="Next slide">&#10095;</button>
+    </div>
   </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
 <script>
-const prevBtn = document.querySelector(".scroll-btn.prev");
-const nextBtn = document.querySelector(".scroll-btn.next");
-const slidesWrapper = document.querySelector(".slides-wrapper");
+document.addEventListener("DOMContentLoaded", () => {
+  const prevBtn = document.querySelector(".scroll-btn.prev");
+  const nextBtn = document.querySelector(".scroll-btn.next");
+  const slidesWrapper = document.querySelector(".slides-wrapper");
 
-prevBtn.addEventListener("click", () => {
-  slidesWrapper.scrollBy({ left: -320, behavior: "smooth" });
-});
+  const scrollAmount = 340; // Adjust per card width + margin
 
-nextBtn.addEventListener("click", () => {
-  slidesWrapper.scrollBy({ left: 320, behavior: "smooth" });
+  prevBtn.addEventListener("click", () => {
+    slidesWrapper.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    slidesWrapper.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  });
+
+  // Keyboard navigation (for accessibility)
+  slidesWrapper.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") slidesWrapper.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    if (e.key === "ArrowRight") slidesWrapper.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  });
 });
 </script>
 {% endblock %}
