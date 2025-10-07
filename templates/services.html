@@ -1,51 +1,52 @@
 {% extends "base.html" %}
 
-{% block title %}Services - Thoth Relay{% endblock %}
+{% block title %}Services – Thoth Relay{% endblock %}
 
 {% block content %}
-<div class="services-container">
-    <h1 class="services-title">Our Services</h1>
+<section class="services-container">
+    <header class="services-header">
+        <h1 class="services-title">Our Services</h1>
+        <p class="services-subtitle">
+            Thoth Relay offers a suite of AI-driven solutions built to streamline workflows, enhance decision-making, and power modern digital experiences.
+        </p>
+    </header>
 
     <div class="services-grid">
         <!-- Service Card 1 -->
-        <div class="service-card">
+        <article class="service-card">
             <div class="icon"><i data-lucide="bot"></i></div>
             <h2>AI Chatbot</h2>
             <p>
-                Engage with state-of-the-art AI chat models seamlessly integrated 
-                into your workflow.
+                Interact with advanced AI chat models through a seamless, intuitive interface — designed for adaptability and continuous learning.
             </p>
-        </div>
+        </article>
 
         <!-- Service Card 2 -->
-        <div class="service-card">
+        <article class="service-card">
             <div class="icon"><i data-lucide="zap"></i></div>
             <h2>Automation</h2>
             <p>
-                Automate repetitive tasks with intelligent orchestration tools 
-                designed for efficiency.
+                Simplify your operations by automating repetitive processes using intelligent orchestration tools that maximize efficiency.
             </p>
-        </div>
+        </article>
 
         <!-- Service Card 3 -->
-        <div class="service-card">
+        <article class="service-card">
             <div class="icon"><i data-lucide="network"></i></div>
             <h2>API Integration</h2>
             <p>
-                Connect multiple AI and cloud services effortlessly with 
-                reliable integrations.
+                Effortlessly connect multiple AI and cloud platforms with robust, secure, and scalable API integrations.
             </p>
-        </div>
+        </article>
 
         <!-- Service Card 4 -->
-        <div class="service-card">
+        <article class="service-card">
             <div class="icon"><i data-lucide="bar-chart-3"></i></div>
             <h2>Analytics</h2>
             <p>
-                Gain insights with powerful real-time analytics dashboards 
-                driven by AI.
+                Leverage real-time AI analytics to uncover insights, track performance, and inform strategic decisions with clarity.
             </p>
-        </div>
+        </article>
     </div>
-</div>
+</section>
 {% endblock %}
