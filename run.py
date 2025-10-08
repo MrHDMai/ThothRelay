@@ -33,6 +33,10 @@ def services():
 def profile():
     return render_template('profile.html')
 
+@app.route('/payment')
+def payment():
+    return render_template('payment.html')
+
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:
