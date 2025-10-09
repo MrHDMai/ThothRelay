@@ -8,8 +8,8 @@
     <div class="model-selector">
         <label for="model-select">Choose AI Model:</label>
         <select id="model-select">
-            {% for key, name in models.items() %}
-                <option value="{{ key }}">{{ name }}</option>
+            {% for model in models %}
+                <option value="{{ model }}">{{ model }}</option>
             {% endfor %}
         </select>
     </div>

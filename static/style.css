@@ -28,6 +28,16 @@ body {
 /* ===================
    NAVBAR
 =================== */
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-link:hover .logo {
+  color: #4de1b2; /* accent color for hover */
+  transition: color 0.25s ease;
+}
+
 .navbar {
   position: fixed;
   top: 0; left: 0;
@@ -187,18 +197,63 @@ body {
 /* ===================
    ABOUT PAGE
 =================== */
+
+/* Hero Section */
+.about-hero {
+  position: relative;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(135deg, #4de1b2 0%, #06b6d4 100%);
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top left, rgba(0,0,0,0.2), rgba(0,0,0,0.45));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 0 1rem;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+}
+
+.hero-content .accent {
+  color: #d1fae5;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* About Text */
 .about-page {
   text-align: center;
   max-width: 1100px;
-  margin: 2rem auto;
+  margin: 4rem auto;
   padding: 2rem;
+  color: #374151;
 }
 
 .about-text {
   font-size: 1.15rem;
   line-height: 1.8;
-  color: #374151;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  animation: fadeInUp 1.2s ease;
 }
 
 /* Slideshow */
@@ -217,50 +272,69 @@ body {
   padding: 1rem 0;
   scrollbar-width: none;
 }
-
-.slides-wrapper::-webkit-scrollbar {
-  display: none;
-}
+.slides-wrapper::-webkit-scrollbar { display: none; }
 
 .slide-card {
-  flex: 0 0 380px;
+  flex: 0 0 360px;
   position: relative;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease;
+  background: #fff;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
-
 .slide-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.18);
 }
 
 .slide-card img {
   width: 100%;
   height: 240px;
   object-fit: cover;
+  border-bottom: 3px solid #4de1b2;
 }
 
 .caption {
   position: absolute;
-  bottom: -70%;
+  bottom: 0;
   left: 0; right: 0;
   background: rgba(77, 225, 178, 0.92);
+  backdrop-filter: blur(6px);
   color: #fff;
-  padding: 20px;
-  font-size: 1.2rem;
+  padding: 18px 20px;
+  font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
-  transition: bottom 0.4s ease;
+  line-height: 1.4;
+  max-height: 70px;
+  overflow: hidden;
+  transform: translateY(100%);
+  opacity: 0.8;
+
+  /* 🍯 Slow, smooth transitions */
+  transition:
+    transform 1.6s cubic-bezier(0.25, 0.1, 0.25, 1.0),
+    max-height 1.6s cubic-bezier(0.25, 0.1, 0.25, 1.0),
+    padding 1.6s ease,
+    opacity 1s ease;
+    
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .slide-card:hover .caption {
-  bottom: 0;
+  transform: translateY(0);
+  max-height: 200px;
+  padding: 32px 26px;
+  font-size: 1.15rem;
+  opacity: 1;
 }
 
+
+
+/* Scroll Buttons */
 .scroll-btn {
   position: absolute;
   top: 50%;
@@ -272,16 +346,31 @@ body {
   cursor: pointer;
   color: white;
   font-size: 22px;
-  transition: background 0.2s ease;
+  transition: background 0.25s ease, transform 0.25s ease;
   z-index: 10;
 }
-
 .scroll-btn:hover {
   background: rgba(59, 203, 165, 0.95);
+  transform: translateY(-50%) scale(1.1);
 }
-
 .scroll-btn.prev { left: 15px; }
 .scroll-btn.next { right: 15px; }
+
+/* Footer */
+.about-footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 
 /* ===================
    HOME

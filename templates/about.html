@@ -1,50 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | ThothRelay</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
-</head>
-<body>
-    <section class="about-hero">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <h1>About ThothRelay</h1>
-            <p>Seamless AI collaboration built with data security in mind.</p>
-        </div>
-    </section>
+{% extends "base.html" %}
+{% block title %}About | Thoth Relay{% endblock %}
 
-    <section class="about-container">
-        <div class="about-card">
-            <h2>Our Vision</h2>
-            <p>
-                At ThothRelay, we believe in bridging the gap between human creativity and artificial intelligence. 
-                Our platform empowers users to collaborate with AI tools securely, efficiently, and intuitively — 
-                bringing innovation and privacy together.
-            </p>
-        </div>
+{% block content %}
+<section class="about-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>About <span class="accent">Thoth Relay</span></h1>
+        <p>Empowering AI collaboration with precision, creativity, and trust.</p>
+    </div>
+</section>
 
-        <div class="about-card">
-            <h2>Data Security</h2>
-            <p>
-                Security is not an afterthought — it’s the foundation. 
-                Every interaction is handled with encryption and best practices to ensure your work, ideas, and data stay protected. 
-                Your trust drives our mission to keep innovation safe.
-            </p>
-        </div>
+<section class="about-page">
+    <div class="about-text">
+        <p>
+            Thoth Relay bridges the gap between human innovation and artificial intelligence. 
+            We design tools that simplify collaboration, enhance data security, 
+            and make AI integration both seamless and intuitive.
+        </p>
+        <p>
+            Our mission is to make AI accessible, responsible, and empowering for creators, 
+            researchers, and developers worldwide.
+        </p>
+    </div>
 
-        <div class="about-card">
-            <h2>Why ThothRelay?</h2>
-            <p>
-                Built for developers, researchers, and creators, ThothRelay transforms AI-assisted workflows into a seamless experience. 
-                With smart integrations and user-friendly interfaces, we aim to make AI collaboration accessible, reliable, and empowering.
-            </p>
+    <div class="slideshow-flex">
+        <button class="scroll-btn prev" onclick="scrollSlides(-1)">‹</button>
+        <div class="slides-wrapper" id="slides">
+            <div class="slide-card">
+                <img src="{{ url_for('static', filename='images/innovation.jpg') }}" alt="Innovation">
+                <div class="caption">Innovate with Intelligence</div>
+            </div>
+            <div class="slide-card">
+                <img src="{{ url_for('static', filename='images/security.jpg') }}" alt="Security">
+                <div class="caption">Security at the Core</div>
+            </div>
+            <div class="slide-card">
+                <img src="{{ url_for('static', filename='images/team.jpg') }}" alt="Collaboration">
+                <div class="caption">Collaborate Seamlessly</div>
+            </div>
         </div>
-    </section>
+        <button class="scroll-btn next" onclick="scrollSlides(1)">›</button>
+    </div>
+</section>
 
-    <footer class="about-footer">
-        <p>© 2025 ThothRelay. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+<footer class="about-footer">
+    <p>© 2025 Thoth Relay. All rights reserved.</p>
+</footer>
+
+<script>
+function scrollSlides(direction) {
+    const container = document.getElementById("slides");
+    const scrollAmount = 400;
+    container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+}
+</script>
+{% endblock %}
