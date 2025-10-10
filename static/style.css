@@ -678,3 +678,148 @@ body {
 .dropdown-content.show {
   display: block;
 }
+
+/* ===================
+   NMAP SECURITY PAGE
+=================== */
+.nmap-hero {
+  position: relative;
+  background: linear-gradient(120deg, #0f172a, #1e293b);
+  color: white;
+  text-align: center;
+  padding: 6rem 1rem;
+  overflow: hidden;
+}
+
+.nmap-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(77, 225, 178, 0.15), transparent 70%);
+  z-index: 1;
+}
+
+.nmap-hero .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.nmap-hero h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.nmap-hero p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ===== Cards ===== */
+.nmap-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 3rem 2rem;
+  max-width: 1150px;
+  margin: auto;
+}
+
+.nmap-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  position: relative;
+}
+
+.nmap-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 28px rgba(77, 225, 178, 0.25);
+}
+
+.nmap-card.special {
+  background: linear-gradient(145deg, #4de1b2, #3bcba5);
+  color: #ffffff;
+}
+
+.nmap-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #4de1b2;
+}
+
+.nmap-card.special .nmap-icon {
+  color: white;
+}
+
+.nmap-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.nmap-card p {
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.nmap-card.special p {
+  color: #e5e7eb;
+}
+
+/* ===== Buttons ===== */
+.nmap-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.8rem;
+  background: #4de1b2;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.nmap-btn:hover {
+  background: #3bcba5;
+  transform: scale(1.05);
+}
+
+.nmap-btn.special {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.nmap-btn.special:hover {
+  background: #e2e8f0;
+}
+
+/* ===== Scan Output ===== */
+.nmap-output {
+  text-align: center;
+  padding: 3rem 1rem 5rem;
+}
+
+.nmap-output h2 {
+  margin-bottom: 1rem;
+  color: #111827;
+  font-weight: 600;
+}
+
+.result-box {
+  background: #f9fafb;
+  border: 2px solid #4de1b2;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #1e293b;
+  min-height: 80px;
+  transition: all 0.5s ease;
+}

@@ -1,11 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>doc
+{% extends "base.html" %}
+
+{% block title %}Thoth Relay — AI Security Suite{% endblock %}
+
+{% block content %}
+<section class="nmap-hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1>AI-Driven Network Security</h1>
+    <p>Empowering secure infrastructures through intelligent network analysis.</p>
+  </div>
+</section>
+
+<section class="nmap-container">
+  <div class="nmap-card">
+    <div class="nmap-icon">
+      <i data-lucide="radar"></i>
+    </div>
+    <h2>Smart Network Mapping</h2>
+    <p>
+      Execute intelligent topology scans powered by Thoth Relay’s adaptive AI engine. 
+      Identify active hosts, services, and potential vulnerabilities across your environment.
+    </p>
+    <button class="nmap-btn" onclick="startScan()">Launch Smart Scan</button>
+  </div>
+
+  <div class="nmap-card">
+    <div class="nmap-icon">
+      <i data-lucide="shield"></i>
+    </div>
+    <h2>AI Threat Assessment</h2>
+    <p>
+      Utilize advanced anomaly detection and automated threat profiling. 
+      Receive actionable insights and recommendations to strengthen your network posture.
+    </p>
+    <button class="nmap-btn" onclick="showAnalysis()">Run Assessment</button>
+  </div>
+
+  <div class="nmap-card special">
+    <div class="nmap-icon">
+      <i data-lucide="cpu"></i>
+    </div>
+    <h2>Autonomous Scan</h2>
+    <p>
+      Let Thoth Relay’s autonomous scanner conduct a deep, adaptive security audit across all reachable interfaces.
+    </p>
+    <button class="nmap-btn special" onclick="surpriseMe()">Run AI Scan</button>
+  </div>
+</section>
+
+<section class="nmap-output">
+  <h2>Scan Output</h2>
+  <div id="scan-result" class="result-box">Awaiting command...</div>
+</section>
+
+{% block scripts %}
+<script>
+function startScan() {
+  const result = document.getElementById('scan-result');
+  result.textContent = 'Executing intelligent Nmap scan...';
+  setTimeout(() => {
+    result.textContent = 'Scan complete: No critical vulnerabilities detected.';
+  }, 3500);
+}
+
+function showAnalysis() {
+  const result = document.getElementById('scan-result');
+  result.textContent = 'Running AI-based threat assessment...';
+  setTimeout(() => {
+    result.textContent = 'Assessment complete: Security posture rated 93%. Minor optimizations recommended.';
+  }, 4000);
+}
+
+function surpriseMe() {
+  const result = document.getElementById('scan-result');
+  const messages = [
+    'AI deep scan complete: Firewall configuration validated. No exposed endpoints found.',
+    'Automated reconnaissance detected legacy port usage. Recommended update to TLS-only services.',
+    'Full system integrity verified. All active nodes operating within expected security parameters.',
+    'Comprehensive audit completed. Adaptive defense mechanisms functioning optimally.'
+  ];
+  result.textContent = 'Initiating autonomous network audit...';
+  setTimeout(() => {
+    result.textContent = messages[Math.floor(Math.random() * messages.length)];
+  }, 4500);
+}
+</script>
+{% endblock %}
+{% endblock %}

@@ -37,6 +37,11 @@ def profile():
 def payment():
     return render_template('payment.html')
 
+@app.route('/nmap')
+def nmap():
+    return render_template('nmap.html')
+
+
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:
