@@ -975,3 +975,53 @@ body {
 .output-console::-webkit-scrollbar-track {
     background: #1f2937;
 }
+
+/* =============== OSRM Section =============== */
+.osrm-info {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f8fafc;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.osrm-content {
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.osrm-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #38bdf8;
+}
+
+.osrm-content p {
+  font-size: 1.05rem;
+  color: #e2e8f0;
+  margin-bottom: 1rem;
+}
+
+.osrm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.osrm-buttons button {
+  background: #38bdf8;
+  border: none;
+  color: #0f172a;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.osrm-buttons button:hover {
+  background: #0ea5e9;
+  transform: scale(1.05);
+}
