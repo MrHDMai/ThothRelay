@@ -823,3 +823,155 @@ body {
   min-height: 80px;
   transition: all 0.5s ease;
 }
+
+/* =========================
+   OFFLINE MAP PAGE STYLES
+   ========================= */
+.offline-map-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    color: #111827;
+    transition: all 0.3s ease-in-out;
+}
+
+.offline-map-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.offline-map-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: 0.5px;
+}
+
+.offline-map-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* --- Controls --- */
+.offline-map-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    background: #f9fafb;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 240px;
+}
+
+.control-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.control-group input {
+    padding: 0.7rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+.control-group input:focus {
+    outline: none;
+    border-color: #4DE1B2;
+}
+
+/* --- Button --- */
+.thoth-btn {
+    align-self: flex-end;
+    padding: 0.8rem 1.5rem;
+    background-color: #4DE1B2;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(77,225,178,0.3);
+    transition: all 0.25s ease;
+}
+
+.thoth-btn:hover {
+    background-color: #3ecda2;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(77,225,178,0.4);
+}
+
+/* --- Map Frame --- */
+.offline-map-display {
+    margin-top: 1.5rem;
+}
+
+.offline-map-frame {
+    height: 600px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: #f3f4f6;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.offline-map-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #9ca3af;
+    font-size: 1rem;
+}
+
+/* --- Output Console --- */
+.offline-map-output {
+    margin-top: 2rem;
+}
+
+.offline-map-output h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.output-console {
+    background-color: #111827;
+    color: #e5e7eb;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    padding: 1rem;
+    border-radius: 8px;
+    height: 240px;
+    overflow-y: auto;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* --- Scrollbar --- */
+.output-console::-webkit-scrollbar {
+    width: 8px;
+}
+.output-console::-webkit-scrollbar-thumb {
+    background: #4DE1B2;
+    border-radius: 8px;
+}
+.output-console::-webkit-scrollbar-track {
+    background: #1f2937;
+}

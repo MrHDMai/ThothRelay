@@ -41,6 +41,10 @@ def payment():
 def nmap():
     return render_template('nmap.html')
 
+@app.route('/offline-map')
+def offline_map():
+    return render_template('offlinemap.html')
+
 
 @app.route('/api/chat', methods=['POST'])
 def chat():

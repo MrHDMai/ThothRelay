@@ -1,11 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Offline Map | Thoth Relay{% endblock %}
+{% block content %}
+
+<div class="offline-map-container">
+    <header class="offline-map-header">
+        <h1 class="offline-map-title">Offline Route Planner</h1>
+        <p class="offline-map-subtitle">
+            Plan and visualize routes using Thoth’s local OSRM engine — no internet required.
+        </p>
+    </header>
+
+    <section class="offline-map-controls">
+        <div class="control-group">
+            <label for="start">Start Location</label>
+            <input type="text" id="start" placeholder="Latitude, Longitude">
+        </div>
+
+        <div class="control-group">
+            <label for="end">End Location</label>
+            <input type="text" id="end" placeholder="Latitude, Longitude">
+        </div>
+
+        <button class="thoth-btn" id="computeRoute">
+            Compute Route
+        </button>
+    </section>
+
+    <section class="offline-map-display">
+        <div id="map" class="offline-map-frame">
+            <div class="offline-map-placeholder">
+                <p>Map will render here once initialized.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="offline-map-output">
+        <h2>Computation Output</h2>
+        <pre id="routeOutput" class="output-console">
+Awaiting computation...
+        </pre>
+    </section>
+</div>
+
+{% endblock %}
