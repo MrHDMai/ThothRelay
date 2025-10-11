@@ -41,7 +41,7 @@ def payment():
 def nmap():
     return render_template('nmap.html')
 
-@app.route('/offline-map')
+@app.route('/offlinemap')
 def offline_map():
     return render_template('offlinemap.html')
 
