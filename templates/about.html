@@ -2,80 +2,74 @@
 {% block title %}About | Thoth Relay{% endblock %}
 
 {% block content %}
-<section class="about-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
+<section class="about-slideshow">
+  <div class="slides-container" id="aboutSlides">
+
+    <!-- Slide 1: About Thoth Relay -->
+    <div class="about-slide" style="background-image: url('{{ url_for('static', filename='images/innovation.jpg') }}');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
         <h1>About <span class="accent">Thoth Relay</span></h1>
-        <p>Empowering AI collaboration with precision, creativity, and trust.</p>
-    </div>
-</section>
-
-<section class="about-page">
-    <div class="about-text">
         <p>
-            Thoth Relay bridges the gap between human innovation and artificial intelligence. 
-            We design tools that simplify collaboration, enhance data security, 
-            and make AI integration both seamless and intuitive.
+          Empowering AI collaboration with precision, creativity, and trust.
+          Thoth Relay bridges the gap between human innovation and artificial intelligence — making data security and creative AI integration seamless and responsible.
         </p>
-        <p>
-            Our mission is to make AI accessible, responsible, and empowering for creators, 
-            researchers, and developers worldwide.
-        </p>
+      </div>
     </div>
 
-    <div class="slideshow-flex">
-        <button class="scroll-btn prev" onclick="scrollSlides(-1)">‹</button>
-        <div class="slides-wrapper" id="slides">
-            <div class="slide-card">
-                <img src="{{ url_for('static', filename='images/innovation.jpg') }}" alt="Innovation">
-                <div class="caption">Innovate with Intelligence</div>
-            </div>
-            <div class="slide-card">
-                <img src="{{ url_for('static', filename='images/security.jpg') }}" alt="Security">
-                <div class="caption">Security at the Core</div>
-            </div>
-            <div class="slide-card">
-                <img src="{{ url_for('static', filename='images/team.jpg') }}" alt="Collaboration">
-                <div class="caption">Collaborate Seamlessly</div>
-            </div>
-        </div>
-        <button class="scroll-btn next" onclick="scrollSlides(1)">›</button>
-    </div>
-</section>
-
-<!-- ========== OSRM INFO SECTION ========== -->
-<section class="osrm-info">
-    <div class="osrm-content">
-        <h2>Offline Mapping with OSRM</h2>
+    <!-- Slide 2: OSRM Integration -->
+    <div class="about-slide" style="background-image: url('{{ url_for('static', filename='images/osrm_map.jpg') }}');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1><span class="accent">Offline Routing</span> with OSRM</h1>
         <p>
-            Thoth Relay integrates the <strong>Open Source Routing Machine (OSRM)</strong> to bring 
-            <span style="color:#4de1b2;">high-performance, offline navigation</span> to your intelligent systems.
-            With OSRM, our platform delivers lightning-fast route computation, 
-            secure offline map access, and seamless AI-assisted navigation — 
-            all optimized for privacy and efficiency.
+          Thoth Relay integrates an offline routing engine powered by OSRM and C++ computation. 
+          Navigate, simulate, and analyze map data locally — ensuring both performance and privacy.
         </p>
-        <p>
-            This module empowers Thoth Relay’s backend to process and visualize routes 
-            directly from the integrated C++ engine — ensuring real-time adaptability 
-            and robust map computation, even without internet connectivity.
-        </p>
-
         <div class="osrm-buttons">
-            <button onclick="window.location.href='/offline-map'">Explore Offline Maps</button>
-            <button onclick="window.location.href='/nmap'">View Security Tools</button>
+          <button onclick="window.location.href='/offline-map'">Explore OSRM</button>
         </div>
+      </div>
     </div>
+
+  </div>
+
+  <!-- Slide Toggles -->
+  <div class="slide-dots" id="slideDots">
+    <span class="dot active" onclick="showSlide(0)"></span>
+    <span class="dot" onclick="showSlide(1)"></span>
+  </div>
 </section>
 
 <footer class="about-footer">
-    <p>© 2025 Thoth Relay. All rights reserved.</p>
+  <p>© 2025 Thoth Relay. All rights reserved.</p>
 </footer>
 
+{% block scripts %}
 <script>
-function scrollSlides(direction) {
-    const container = document.getElementById("slides");
-    const scrollAmount = 400;
-    container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+let currentSlide = 0;
+const slides = document.querySelectorAll('.about-slide');
+const dots = document.querySelectorAll('.dot');
+
+function showSlide(index) {
+  if (index >= slides.length) index = 0;
+  if (index < 0) index = slides.length - 1;
+  currentSlide = index;
+
+  slides.forEach((slide, i) => {
+    slide.style.transform = `translateX(${(i - currentSlide) * 100}%)`;
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentSlide);
+  });
 }
+
+// Auto-rotate every 8 seconds
+setInterval(() => showSlide(currentSlide + 1), 8000);
+
+// Initialize positions
+showSlide(0);
 </script>
+{% endblock %}
 {% endblock %}
