@@ -195,64 +195,241 @@ body {
 }
 
 /* ===================
-   ABOUT / OSRM SLIDESHOW
+   ABOUT PAGE
 =================== */
-.about-slideshow {
+
+/* Hero Section */
+.about-hero {
   position: relative;
-  width: 100%;
-  height: 100vh;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(135deg, #4de1b2 0%, #06b6d4 100%);
   overflow: hidden;
 }
 
-.slides-container {
-  display: flex;
-  transition: transform 1s ease-in-out;
-  width: 100%;
-  height: 100%;
-}
-
-.about-slide {
-  position: relative;
-  flex: 0 0 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  transition: transform 1s ease-in-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.slide-overlay {
+.hero-overlay {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(15, 23, 42, 0.65);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top left, rgba(0,0,0,0.2), rgba(0,0,0,0.45));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 0 1rem;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+}
+
+.hero-content .accent {
+  color: #d1fae5;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* About Text */
+.about-page {
+  text-align: center;
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 2rem;
+  color: #374151;
+}
+
+.about-text {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  animation: fadeInUp 1.2s ease;
+}
+
+/* Slideshow */
+.slideshow-flex {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.slides-wrapper {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+  scrollbar-width: none;
+}
+.slides-wrapper::-webkit-scrollbar { display: none; }
+
+.slide-card {
+  flex: 0 0 360px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.slide-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+}
+
+.slide-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-bottom: 3px solid #4de1b2;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  background: rgba(77, 225, 178, 0.92);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  padding: 18px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+  max-height: 70px;
+  overflow: hidden;
+  transform: translateY(100%);
+  opacity: 0.8;
+
+  /* 🍯 Slow, smooth transitions */
+  transition:
+    transform 1.6s cubic-bezier(0.25, 0.1, 0.25, 1.0),
+    max-height 1.6s cubic-bezier(0.25, 0.1, 0.25, 1.0),
+    padding 1.6s ease,
+    opacity 1s ease;
+    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-card:hover .caption {
+  transform: translateY(0);
+  max-height: 200px;
+  padding: 32px 26px;
+  font-size: 1.15rem;
+  opacity: 1;
+}
+
+
+
+/* Scroll Buttons */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(77, 225, 178, 0.85);
+  border: none;
+  padding: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  font-size: 22px;
+  transition: background 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+}
+.scroll-btn:hover {
+  background: rgba(59, 203, 165, 0.95);
+  transform: translateY(-50%) scale(1.1);
+}
+.scroll-btn.prev { left: 15px; }
+.scroll-btn.next { right: 15px; }
+
+/* Footer */
+.about-footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================
+   OSRM INFO SECTION
+=================== */
+.osrm-info {
+  background: linear-gradient(135deg, #0f172a 0%, #082f2a 100%);
+  color: #e5f9f5;
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.osrm-info::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(77, 225, 178, 0.12),
+    transparent 70%
+  );
+  z-index: 0;
+}
+
+.osrm-content {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
   z-index: 1;
 }
 
-.slide-content {
-  position: relative;
-  z-index: 2;
-  color: #e5f9f5;
-  text-align: center;
-  max-width: 850px;
-  padding: 2rem;
-}
-
-.slide-content h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
+.osrm-content h2 {
+  font-size: 2.4rem;
+  color: #4de1b2;
   margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   background: linear-gradient(90deg, #4de1b2, #38bdf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.slide-content p {
-  font-size: 1.15rem;
+.osrm-content p {
+  font-size: 1.1rem;
   line-height: 1.8;
   color: #cdebe5;
+  margin-bottom: 1.5rem;
+}
+
+.osrm-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .osrm-buttons button {
@@ -265,39 +442,19 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.35s ease;
-  margin-top: 1.5rem;
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
 }
 
 .osrm-buttons button:hover {
   transform: translateY(-3px);
   background: linear-gradient(135deg, #38bdf8, #4de1b2);
+  box-shadow: 0 6px 20px rgba(77, 225, 178, 0.35);
 }
 
-/* Slide Dots */
-.slide-dots {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  z-index: 10;
+.osrm-buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(77, 225, 178, 0.2);
 }
-
-.dot {
-  width: 14px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.dot.active, .dot:hover {
-  background: #4de1b2;
-}
-
 
 
 /* ===================
