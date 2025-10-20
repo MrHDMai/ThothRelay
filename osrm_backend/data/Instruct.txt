@@ -1,1 +1,3 @@
 This file contains map data
+in order to load the code and config the map data for computation
+use these data
