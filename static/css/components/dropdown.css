@@ -1,0 +1,29 @@
+.dropdown { position: relative; }
+.menu-toggle { cursor: pointer; transition: color 0.25s ease; }
+.menu-toggle:hover { color: #4de1b2; }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0; top: 120%;
+  background-color: #1f2937;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  min-width: 150px;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.dropdown-content div {
+  padding: 10px 15px;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-content div:hover {
+  background-color: #4de1b2;
+  color: #1f2937;
+}
+.dropdown-content.show { display: block; }

@@ -1,0 +1,34 @@
+.logo-link { text-decoration: none; color: inherit; }
+
+.logo-link:hover .logo {
+  color: #4de1b2;
+  transition: color 0.25s ease;
+}
+
+.navbar {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 60px;
+  background-color: #1f2937;
+  color: #fff;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4de1b2;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-buttons div {
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+.nav-buttons div:hover { color: #4de1b2; }
