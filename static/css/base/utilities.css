@@ -1,0 +1,13 @@
+/* ===================
+   Utility Classes
+=================== */
+.text-center { text-align: center; }
+.text-teal { color: #4de1b2; }
+.bg-dark { background-color: #1f2937; color: white; }
+.bg-light { background-color: #f9fafb; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.p-2 { padding: 0.5rem; }
+.p-4 { padding: 1rem; }
+.rounded { border-radius: 10px; }
+.shadow { box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
