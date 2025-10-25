@@ -1,0 +1,31 @@
+.home-page {
+  background: linear-gradient(180deg, #f9fafb 0%, #e0f7f4 100%);
+  padding: 3rem 1.5rem;
+}
+
+.home-intro {
+  text-align: center;
+  color: #1f2937;
+}
+
+.home-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.home-card {
+  flex: 1 1 280px;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-5px);
+}

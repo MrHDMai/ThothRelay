@@ -1,0 +1,21 @@
+.osrm-info {
+  background-color: #f9fafb;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.osrm-info h2 {
+  color: #4de1b2;
+  margin-bottom: 1rem;
+}
+
+.osrm-info p {
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.osrm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

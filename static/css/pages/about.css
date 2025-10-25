@@ -1,0 +1,52 @@
+.about-hero {
+  position: relative;
+  height: 350px;
+  background: url('../images/thoth-banner.jpg') center/cover no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 41, 55, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.about-page {
+  background: #f9fafb;
+  padding: 2rem;
+}
+
+.slides-wrapper {
+  display: flex;
+  overflow: hidden;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-card {
+  flex: 0 0 250px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.slide-card h3 {
+  color: #4de1b2;
+  margin-bottom: 0.5rem;
+}
+
+.caption {
+  font-size: 0.9rem;
+  color: #555;
+}
