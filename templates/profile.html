@@ -1,15 +1,85 @@
 {% extends "base.html" %}
 
-{% block title %}Profile - Thoth Relay{% endblock %}
+{% block title %}Profile Dashboard - Thoth Relay{% endblock %}
 
 {% block content %}
 <div class="profile-container">
-    <div class="profile-card">
-        <img src="{{ url_for('static', filename='default-avatar.png') }}" alt="Profile Picture" class="profile-avatar">
-        <h2>John Doe</h2>
-        <p>Email: john.doe@example.com</p>
-        <p>Member since: September 2025</p>
-        <button class="edit-btn">Edit Profile</button>
+  
+  <!-- Header Section -->
+  <div class="profile-header">
+    <div class="profile-avatar-section">
+      <img src="{{ url_for('static', filename='default-avatar.png') }}" alt="Profile Picture" class="profile-avatar">
     </div>
+    <div class="profile-summary">
+      <h2>John Doe</h2>
+      <p class="profile-email">john.doe@example.com</p>
+      <p class="profile-member-since">Member since: September 2025</p>
+      <button class="edit-btn">Edit Profile</button>
+    </div>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div class="dashboard-section">
+    <h3>Usage Dashboard</h3>
+
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h4>API Calls</h4>
+        <p class="stat-value">1,248</p>
+        <span class="trend up">+8% this week</span>
+      </div>
+      <div class="dashboard-card">
+        <h4>Tokens Used</h4>
+        <p class="stat-value">89,345</p>
+        <span class="trend down">-3% vs last week</span>
+      </div>
+      <div class="dashboard-card">
+        <h4>Models Accessed</h4>
+        <p class="stat-value">5</p>
+        <span class="trend flat">Stable</span>
+      </div>
+      <div class="dashboard-card">
+        <h4>Avg. Response Time</h4>
+        <p class="stat-value">1.2s</p>
+        <span class="trend up">Improved</span>
+      </div>
+    </div>
+
+    <!-- Chart placeholder -->
+    <div class="usage-chart">
+      <h4>Usage Over Time</h4>
+      <div class="chart-placeholder">[ Chart Placeholder — integrate real data later ]</div>
+    </div>
+  </div>
+
+  <!-- Info Grid -->
+  <div class="profile-content-grid">
+    <div class="profile-section">
+      <h3>Account Details</h3>
+      <div class="profile-detail"><strong>Role:</strong> User</div>
+      <div class="profile-detail"><strong>Subscription:</strong> Free Tier</div>
+      <div class="profile-detail"><strong>Status:</strong> Active</div>
+    </div>
+
+    <div class="profile-section">
+      <h3>Recent Activity</h3>
+      <ul class="activity-list">
+        <li>Connected to OSRM Engine — <span>2 days ago</span></li>
+        <li>Queried “AI Market Trends” — <span>4 days ago</span></li>
+        <li>Synced Relay Data — <span>Last week</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Connected Services -->
+  <div class="profile-extra">
+    <h3>Connected Services</h3>
+    <div class="connected-apps">
+      <div class="app-card">OSRM Analytics</div>
+      <div class="app-card">Relay Sync</div>
+      <div class="app-card">Market AI Module</div>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
