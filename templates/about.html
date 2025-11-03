@@ -2,81 +2,114 @@
 {% block title %}About | Thoth Relay{% endblock %}
 
 {% block content %}
+
 <section class="about-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <h1>About <span class="accent">Thoth Relay</span></h1>
-        <p>Empowering AI collaboration with precision, creativity, and trust.</p>
-    </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>About <span class="accent">Thoth Relay</span></h1>
+    <p>Empowering AI collaboration with precision, security, and creativity.</p>
+  </div>
 </section>
 
-<section class="about-page">
-    <div class="about-text">
-        <p>
-            Thoth Relay bridges the gap between human innovation and artificial intelligence. 
-            We design tools that simplify collaboration, enhance data security, 
-            and make AI integration both seamless and intuitive.
-        </p>
-        <p>
-            Our mission is to make AI accessible, responsible, and empowering for creators, 
-            researchers, and developers worldwide.
-        </p>
+<!-- ====== Brand Slideshow ====== -->
+<section class="brand-slideshow">
+  <div class="slide fade">
+    <img src="{{ url_for('static', filename='images/innovation.jpg') }}" alt="Innovation">
+    <div class="caption">
+      <h3>Innovate with Intelligence</h3>
+      <p>Driving AI-driven solutions across industries.</p>
     </div>
-
-
-<!-- ========== OSRM INFO SECTION ========== -->
-<section class="osrm-info">
-    <div class="osrm-content">
-        <h2>Offline Mapping with OSRM</h2>
-        <p>
-            Thoth Relay integrates the <strong>Open Source Routing Machine (OSRM)</strong> to bring 
-            <span style="color:#4de1b2;">high-performance, offline navigation</span> to your intelligent systems.
-            With OSRM, our platform delivers lightning-fast route computation, 
-            secure offline map access, and seamless AI-assisted navigation — 
-            all optimized for privacy and efficiency.
-        </p>
-        <p>
-            This module empowers Thoth Relay’s backend to process and visualize routes 
-            directly from the integrated C++ engine — ensuring real-time adaptability 
-            and robust map computation, even without internet connectivity.
-        </p>
-
-        <div class="osrm-buttons">
-            <button onclick="window.location.href='/offline-map'">Explore Offline Maps</button>
-            <button onclick="window.location.href='/nmap'">View Security Tools</button>
-        </div>
+  </div>
+  <div class="slide fade">
+    <img src="{{ url_for('static', filename='images/security.jpg') }}" alt="Security">
+    <div class="caption">
+      <h3>Security at the Core</h3>
+      <p>Protecting data integrity with advanced encryption and monitoring.</p>
     </div>
+  </div>
+  <div class="slide fade">
+    <img src="{{ url_for('static', filename='images/team.jpg') }}" alt="Collaboration">
+    <div class="caption">
+      <h3>Collaborate Seamlessly</h3>
+      <p>Empowering teams to create, connect, and deploy smarter.</p>
+    </div>
+  </div>
+
+  <div class="dots">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
 </section>
 
-    <div class="slideshow-flex">
-        <button class="scroll-btn prev" onclick="scrollSlides(-1)">‹</button>
-        <div class="slides-wrapper" id="slides">
-            <div class="slide-card">
-                <img src="{{ url_for('static', filename='images/innovation.jpg') }}" alt="Innovation">
-                <div class="caption">Innovate with Intelligence</div>
-            </div>
-            <div class="slide-card">
-                <img src="{{ url_for('static', filename='images/security.jpg') }}" alt="Security">
-                <div class="caption">Security at the Core</div>
-            </div>
-            <div class="slide-card">
-                <img src="{{ url_for('static', filename='images/team.jpg') }}" alt="Collaboration">
-                <div class="caption">Collaborate Seamlessly</div>
-            </div>
-        </div>
-        <button class="scroll-btn next" onclick="scrollSlides(1)">›</button>
-    </div>
+<!-- ====== About Thoth Section ====== -->
+<section class="about-section">
+  <div class="about-text">
+    <h2>Our Vision</h2>
+    <p>
+      Thoth Relay bridges the gap between human ingenuity and artificial intelligence.
+      We design frameworks that simplify collaboration, enhance data privacy,
+      and ensure AI integration remains seamless, secure, and human-centric.
+    </p>
+    <p>
+      With scalable solutions, modular integrations, and zero-trust architecture,
+      Thoth Relay ensures reliability and agility in modern AI operations.
+    </p>
+  </div>
+  <div class="about-image">
+    <img src="{{ url_for('static', filename='images/thoth-banner.jpg') }}" alt="Thoth Relay System">
+  </div>
+</section>
+
+<!-- ====== Security & OSRM Integration ====== -->
+<section class="feature-grid">
+  <div class="feature-card">
+    <h3>Offline Mapping (OSRM)</h3>
+    <p>
+      Integrating <strong>OSRM</strong> for high-performance offline navigation,
+      ensuring rapid route computation and edge-device autonomy.
+    </p>
+    <button onclick="window.location.href='/offline-map'">Explore Offline Maps</button>
+  </div>
+
+  <div class="feature-card">
+    <h3>Security Intelligence</h3>
+    <p>
+      Built-in <strong>network auditing</strong> and <strong>real-time intrusion detection</strong>
+      protect your data and AI endpoints from emerging threats.
+    </p>
+    <button onclick="window.location.href='/nmap'">View Security Tools</button>
+  </div>
+
+  <div class="feature-card">
+    <h3>Future Integrations</h3>
+    <p>
+      Stay tuned for modules integrating cryptographic logging,
+      federated learning, and cross-cloud trust verification.
+    </p>
+    <button disabled class="disabled-btn">Coming Soon</button>
+  </div>
 </section>
 
 <footer class="about-footer">
-    <p>© 2025 Thoth Relay. All rights reserved.</p>
+  <p>© 2025 Thoth Relay. All rights reserved.</p>
 </footer>
 
 <script>
-function scrollSlides(direction) {
-    const container = document.getElementById("slides");
-    const scrollAmount = 400;
-    container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+  slides.forEach(slide => slide.style.display = "none");
+  slideIndex++;
+  if (slideIndex > slides.length) slideIndex = 1;
+  slides[slideIndex - 1].style.display = "block";
+  dots.forEach(dot => dot.classList.remove("active"));
+  dots[slideIndex - 1].classList.add("active");
+  setTimeout(showSlides, 4500);
 }
 </script>
+
 {% endblock %}

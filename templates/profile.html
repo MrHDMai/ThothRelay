@@ -1,115 +1,85 @@
 {% extends "base.html" %}
-{% block title %}About | Thoth Relay{% endblock %}
+
+{% block title %}Profile Dashboard - Thoth Relay{% endblock %}
 
 {% block content %}
-<section class="about-hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <h1>About <span class="accent">Thoth Relay</span></h1>
-    <p>Empowering AI collaboration with precision, creativity, and trust.</p>
-  </div>
-</section>
-
-<section class="about-page">
-  <div class="about-text">
-    <p>
-      Thoth Relay bridges the gap between human innovation and artificial intelligence. 
-      We design tools that simplify collaboration, enhance data security, 
-      and make AI integration both seamless and intuitive.
-    </p>
-    <p>
-      Our mission is to make AI accessible, responsible, and empowering for creators, 
-      researchers, and developers worldwide.
-    </p>
+<div class="profile-container">
+  
+  <!-- Header Section -->
+  <div class="profile-header">
+    <div class="profile-avatar-section">
+      <img src="{{ url_for('static', filename='default-avatar.png') }}" alt="Profile Picture" class="profile-avatar">
+    </div>
+    <div class="profile-summary">
+      <h2>John Doe</h2>
+      <p class="profile-email">john.doe@example.com</p>
+      <p class="profile-member-since">Member since: September 2025</p>
+      <button class="edit-btn">Edit Profile</button>
+    </div>
   </div>
 
-  <!-- ========== OSRM INFO SECTION ========== -->
-  <section class="osrm-highlight">
-    <h2>Offline Mapping with OSRM</h2>
-    <p>
-      Thoth Relay integrates the <strong>Open Source Routing Machine (OSRM)</strong> to bring 
-      <span style="color:#4de1b2;">high-performance, offline navigation</span> to your intelligent systems.
-      With OSRM, our platform delivers lightning-fast route computation, 
-      secure offline map access, and seamless AI-assisted navigation — 
-      all optimized for privacy and efficiency.
-    </p>
-    <p>
-      This module empowers Thoth Relay’s backend to process and visualize routes 
-      directly from the integrated C++ engine — ensuring real-time adaptability 
-      and robust map computation, even without internet connectivity.
-    </p>
+  <!-- Dashboard Section -->
+  <div class="dashboard-section">
+    <h3>Usage Dashboard</h3>
 
-    <div class="osrm-buttons">
-      <button onclick="window.location.href='/offline-map'">Explore Offline Maps</button>
-      <button onclick="window.location.href='/nmap'">View Security Tools</button>
-    </div>
-  </section>
-
-  <!-- ========== SECURITY FEATURES SECTION ========== -->
-  <section class="security-section">
-    <h2>Security & Trust at the Core</h2>
-    <p class="security-intro">
-      At Thoth Relay, data protection and user trust are not optional — they’re fundamental.  
-      Our systems are designed with layered encryption, isolated computation, and transparent auditability.
-    </p>
-
-    <div class="security-grid">
-      <div class="security-card">
-        <div class="icon">🔒</div>
-        <h3>End-to-End Encryption</h3>
-        <p>Your data is encrypted both in transit and at rest, ensuring complete confidentiality.</p>
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h4>API Calls</h4>
+        <p class="stat-value">1,248</p>
+        <span class="trend up">+8% this week</span>
       </div>
-
-      <div class="security-card">
-        <div class="icon">🧠</div>
-        <h3>AI Ethics Compliance</h3>
-        <p>We adhere to global standards for AI transparency, fairness, and accountability.</p>
+      <div class="dashboard-card">
+        <h4>Tokens Used</h4>
+        <p class="stat-value">89,345</p>
+        <span class="trend down">-3% vs last week</span>
       </div>
-
-      <div class="security-card">
-        <div class="icon">🛰️</div>
-        <h3>Offline-First Infrastructure</h3>
-        <p>All computations can be performed locally — empowering privacy-focused AI workflows.</p>
+      <div class="dashboard-card">
+        <h4>Models Accessed</h4>
+        <p class="stat-value">5</p>
+        <span class="trend flat">Stable</span>
       </div>
-
-      <div class="security-card future">
-        <div class="icon">⚙️</div>
-        <h3>Upcoming Security Modules</h3>
-        <p>Future integrations for multi-factor auth, relay monitoring, and key management are on the horizon.</p>
+      <div class="dashboard-card">
+        <h4>Avg. Response Time</h4>
+        <p class="stat-value">1.2s</p>
+        <span class="trend up">Improved</span>
       </div>
     </div>
-  </section>
 
-  <!-- Existing slideshow -->
-  <div class="slideshow-flex">
-    <button class="scroll-btn prev" onclick="scrollSlides(-1)">‹</button>
-    <div class="slides-wrapper" id="slides">
-      <div class="slide-card">
-        <img src="{{ url_for('static', filename='images/innovation.jpg') }}" alt="Innovation">
-        <div class="caption">Innovate with Intelligence</div>
-      </div>
-      <div class="slide-card">
-        <img src="{{ url_for('static', filename='images/security.jpg') }}" alt="Security">
-        <div class="caption">Security at the Core</div>
-      </div>
-      <div class="slide-card">
-        <img src="{{ url_for('static', filename='images/team.jpg') }}" alt="Collaboration">
-        <div class="caption">Collaborate Seamlessly</div>
-      </div>
+    <!-- Chart placeholder -->
+    <div class="usage-chart">
+      <h4>Usage Over Time</h4>
+      <div class="chart-placeholder">[ Chart Placeholder — integrate real data later ]</div>
     </div>
-    <button class="scroll-btn next" onclick="scrollSlides(1)">›</button>
   </div>
-</section>
 
-<footer class="about-footer">
-  <p>© 2025 Thoth Relay. All rights reserved.</p>
-</footer>
+  <!-- Info Grid -->
+  <div class="profile-content-grid">
+    <div class="profile-section">
+      <h3>Account Details</h3>
+      <div class="profile-detail"><strong>Role:</strong> User</div>
+      <div class="profile-detail"><strong>Subscription:</strong> Free Tier</div>
+      <div class="profile-detail"><strong>Status:</strong> Active</div>
+    </div>
 
-<script>
-function scrollSlides(direction) {
-  const container = document.getElementById("slides");
-  const scrollAmount = 400;
-  container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-}
-</script>
+    <div class="profile-section">
+      <h3>Recent Activity</h3>
+      <ul class="activity-list">
+        <li>Connected to OSRM Engine — <span>2 days ago</span></li>
+        <li>Queried “AI Market Trends” — <span>4 days ago</span></li>
+        <li>Synced Relay Data — <span>Last week</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Connected Services -->
+  <div class="profile-extra">
+    <h3>Connected Services</h3>
+    <div class="connected-apps">
+      <div class="app-card">OSRM Analytics</div>
+      <div class="app-card">Relay Sync</div>
+      <div class="app-card">Market AI Module</div>
+    </div>
+  </div>
+
+</div>
 {% endblock %}
