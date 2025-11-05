@@ -1,28 +1,77 @@
 {% extends "base.html" %}
-
 {% block title %}Home | Thoth Relay{% endblock %}
 
 {% block content %}
-<div class="content home-page">
-    <h1 class="header">Welcome to Thoth Relay</h1>
-    <p class="home-intro">
-        Your gateway to AI-powered tools, insights, and services.  
-        Navigate using the menu above to explore more.
-    </p>
-
-    <div class="home-flex">
-        <div class="home-card">
-            <h2>Get Started</h2>
-            <p>Try our AI Chat right away with multiple models to choose from.</p>
-        </div>
-        <div class="home-card">
-            <h2>About Us</h2>
-            <p>Learn more about our mission and the technology behind Thoth Relay.</p>
-        </div>
-        <div class="home-card">
-            <h2>Services</h2>
-            <p>Discover the range of solutions we provide to scale your projects.</p>
-        </div>
+<!-- ===============================
+     HERO SECTION
+=============================== -->
+<section class="home-hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Welcome to <span class="accent">Thoth Relay</span></h1>
+    <p>Your gateway to AI-powered tools, secure integrations, and intelligent automation.</p>
+    <div class="hero-buttons">
+      <button onclick="window.location.href='/chat'">Launch AI Chat</button>
+      <button class="secondary-btn" onclick="window.location.href='/services'">Explore Services</button>
     </div>
-</div>
+  </div>
+</section>
+
+<!-- ===============================
+     QUICK FEATURE CARDS
+=============================== -->
+<section class="home-page">
+  <div class="home-intro">
+    <h2>Empowering Your AI Journey</h2>
+    <p>Explore core areas of Thoth Relay and get started today.</p>
+  </div>
+
+  <div class="home-flex">
+    <div class="home-card">
+      <h3>AI Chat</h3>
+      <p>Interact with multiple AI models and get intelligent insights instantly.</p>
+      <button onclick="window.location.href='/chat'">Start Chat</button>
+    </div>
+    <div class="home-card">
+      <h3>Offline Intelligence</h3>
+      <p>Use offline maps and routing through OSRM for private data-driven navigation.</p>
+      <button onclick="window.location.href='/offline-map'">View Maps</button>
+    </div>
+    <div class="home-card">
+      <h3>Security Suite</h3>
+      <p>Scan, analyze, and secure your digital environment using integrated tools.</p>
+      <button onclick="window.location.href='/nmap'">Open Tools</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===============================
+     DASHBOARD PREVIEW / METRICS
+=============================== -->
+<section class="stats-section">
+  <h2>System Insights</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>92%</h3>
+      <p>AI Model Uptime</p>
+    </div>
+    <div class="stat-card">
+      <h3>1.3k</h3>
+      <p>Active Sessions</p>
+    </div>
+    <div class="stat-card">
+      <h3>99.97%</h3>
+      <p>Data Integrity</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===============================
+     CTA FOOTER
+=============================== -->
+<section class="cta-section">
+  <h2>Join the Next Generation of AI Collaboration</h2>
+  <p>Start building smarter systems with Thoth Relay today.</p>
+  <button onclick="window.location.href='/register'">Get Started</button>
+</section>
 {% endblock %}
